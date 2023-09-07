@@ -1,0 +1,38 @@
+.TopBar {
+    font-family: 'Montserrat', sans-serif;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.Logo {
+    margin-right: 32px;
+}
+
+.SearchWrapper {
+    background-color: white;
+    align-items: center;
+    justify-content: center;
+}
+
+.SearchBar {
+    font-size: 24px;
+    padding: 2px 8px;
+    border: none;
+    transition: width 0.1s linear;
+    width: 256px;
+    height: 40px;
+    display: inline-block;
+    vertical-align: middle;
+    border-bottom: 1px solid gray;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 700;
+    text-overflow: ellipsis;
+}
+
+.SearchBar:focus {
+    outline: none;
+    border-bottom: 1px solid gray;
+    border-radius: none;
+    width: 640px;
+}

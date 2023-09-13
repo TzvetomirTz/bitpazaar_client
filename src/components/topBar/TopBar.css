@@ -3,6 +3,7 @@
     padding: 8px;
     display: flex;
     align-items: center;
+    background-color: #ffffff;
 }
 
 .Logo {
@@ -20,7 +21,8 @@
     padding: 2px 8px;
     border: none;
     transition: width 0.1s linear;
-    width: 256px;
+    /* width: 256px; */
+    width: 640px;
     height: 40px;
     display: inline-block;
     vertical-align: middle;
@@ -35,4 +37,20 @@
     border-bottom: 1px solid gray;
     border-radius: none;
     width: 640px;
+}
+
+.SearchRes {
+    width: 640px;
+    height: 256px;
+    position: absolute;
+    background-color: white;
+    overflow-y: scroll;
+    border: 1px solid gray;
+    border-top: none;
+}
+
+.AuthIcon {
+    height: 32px;
+    width: 32px;
+    background-color: green;
 }

@@ -3,12 +3,15 @@ import Logo from '../logo/Logo';
 import React, {useRef, useState, useCallback} from 'react';
 import { isAddress } from 'web3-validator';
 import erc721Adapter from '../../services/contracts/Erc721Adapter';
-import authState from '../../state/AuthState';
+import { authState } from '../../state/AuthState';
+import { create } from "zustand";
 const { ethers } = require("ethers");
 
 function TopBar() {
   const [searchBarState, setSearchBarState] = useState("");
   const [searchResErc721Name, setSearchResErc721Name] = useState("");
+  const setAuthState = authState((state) => state.setSigner);
+  const signer = authState((state) => state.signer);
 
   React.useEffect(() => {
     connectWallet();
@@ -25,10 +28,11 @@ function TopBar() {
 
   async function connectWallet() {
 		if(typeof window.ethereum != 'undefined') {
-			let provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-			// await provider.send("eth_requestAccounts", []);
-			// signer.current = provider.getSigner();
-			// setWalletAddr(await signer.current.getAddress());
+			const provider = new ethers.BrowserProvider(window.ethereum, "any");
+      const signer = await provider.getSigner();
+
+      console.log("addr: " + signer.address);
+      setAuthState(signer);
 		}
 	}
 
@@ -45,7 +49,7 @@ function TopBar() {
           <input className='SearchBar' onKeyDown={searchGo} onChange={setSearchBarState}></input>
           <div className='SearchRes'>asdf: {searchResErc721Name}</div>
         </div>
-        <div className='AuthIcon'></div>
+        <div className='AuthIcon'>{signer.address}</div>
       </div>
     );
   }

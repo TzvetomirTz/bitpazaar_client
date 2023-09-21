@@ -50,7 +50,10 @@
 }
 
 .AuthIcon {
-    height: 32px;
-    width: 32px;
+    /* height: 32px;
+    width: 32px; */
     background-color: green;
+    /* border-radius: 100%; */
+    margin-right: 0;
+    cursor: pointer;
 }

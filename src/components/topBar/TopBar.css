@@ -50,10 +50,15 @@
 }
 
 .AuthIcon {
-    /* height: 32px;
-    width: 32px; */
-    background-color: green;
-    /* border-radius: 100%; */
-    margin-right: 0;
     cursor: pointer;
+    padding: 2px 8px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 132px;
+    transition: width 0.1s linear;
+    margin-left:auto
+}
+
+.AuthIcon:hover {
+    width: 400px;
 }

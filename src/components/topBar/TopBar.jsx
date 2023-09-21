@@ -1,38 +1,39 @@
 import './TopBar.css';
 import Logo from '../logo/Logo';
-import React, {useRef, useState, useCallback} from 'react';
+import React, { useState } from 'react';
 import { isAddress } from 'web3-validator';
 import erc721Adapter from '../../services/contracts/Erc721Adapter';
 import { authState } from '../../state/AuthState';
-import { create } from "zustand";
 const { ethers } = require("ethers");
 
 function TopBar() {
   const [searchBarState, setSearchBarState] = useState("");
   const [searchResErc721Name, setSearchResErc721Name] = useState("");
-  const setAuthState = authState((state) => state.setSigner);
+  const connectWallet = authState((state) => state.connectWallet);
   const signer = authState((state) => state.signer);
+  const walletConnected = authState((state) => state.connected);
 
   React.useEffect(() => {
-    connectWallet();
+    triggerConnectWallet();
   }, []);
 
   React.useEffect(() => {
-    if(searchBarState !== "") {
-      if(isAddress(searchBarState.target.value)) {
-        console.log("We've got an address!");
-        setSearchResErc721Name(erc721Adapter.getErc721Name());
+    (async () => {
+      if(searchBarState !== "") {
+        if(isAddress(searchBarState.target.value)) {
+          console.log("We've got an address!");
+          setSearchResErc721Name(await erc721Adapter.getErc721Name(signer, searchBarState.target.value));
+        }
       }
-    }
+    })()
   }, [searchBarState]);
 
-  async function connectWallet() {
+  async function triggerConnectWallet() {
 		if(typeof window.ethereum != 'undefined') {
 			const provider = new ethers.BrowserProvider(window.ethereum, "any");
       const signer = await provider.getSigner();
 
-      console.log("addr: " + signer.address);
-      setAuthState(signer);
+      connectWallet(provider, signer);
 		}
 	}
 
@@ -47,9 +48,11 @@ function TopBar() {
         <Logo />
         <div className='SearchWrapper'>
           <input className='SearchBar' onKeyDown={searchGo} onChange={setSearchBarState}></input>
-          <div className='SearchRes'>asdf: {searchResErc721Name}</div>
+          <div className='SearchRes'>{searchResErc721Name}</div>
         </div>
-        <div className='AuthIcon'>{signer.address}</div>
+        {walletConnected && 
+          <div className='AuthIcon'> {signer.address} </div>
+        }
       </div>
     );
   }

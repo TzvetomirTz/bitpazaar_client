@@ -1,8 +1,5 @@
 .Logo {
     display: inline-block;
-    /* font-family: 'Montserrat', sans-serif; */
-    font-size: 32px;
-    color: #090420;
-    padding: 4px;
-    border: 1px solid #090420;
+    fill: #ffffff;
+    height: 32px;
 }

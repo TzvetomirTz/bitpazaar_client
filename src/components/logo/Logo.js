@@ -1,12 +1,10 @@
 import './Logo.css';
+import { ReactComponent as BpLogo } from '../../assets/BP_Logo.svg';
 
 function Logo() {
-    return (
-      <div className="Logo">
-          bp
-      </div>
-    );
-  }
-  
-  export default Logo;
-  
+  return (
+    <BpLogo className='Logo' />
+  );
+}
+
+export default Logo;

@@ -16,10 +16,6 @@ function TopBar() {
   const walletConnected = authState((state) => state.connected);
 
   React.useEffect(() => {
-    // triggerConnectWallet();
-  }, []);
-
-  React.useEffect(() => {
     (async () => {
       if(searchBarState !== "") {
         if(isAddress(searchBarState.target.value)) {
@@ -56,13 +52,16 @@ function TopBar() {
 
     return (
       <div className="TopBar">
-        <Logo />
-        <div className='SearchWrapper'>
+        <Logo className="LogoIcon" />
+        {/* <div className='SearchWrapper'>
           <input className='SearchBar' onKeyDown={searchGo} onChange={setSearchBarState}></input>
           <div className='SearchRes'>{searchResErc721Name}</div>
-        </div>
+        </div> */}
         <div className='AuthWrapper'>
-          <div className='AuthIcon' onClick={triggerConnectWallet}></div>
+          
+          {!walletConnected &&
+            <div className='ConnectWalletBtn' onClick={triggerConnectWallet}>Connect Wallet</div>
+          }
           {walletConnected &&
             <div className='AuthAddr'> {signer.address} </div>
           }

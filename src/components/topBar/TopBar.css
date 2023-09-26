@@ -3,11 +3,13 @@
     padding: 8px;
     display: flex;
     align-items: center;
-    background-color: #ffffff;
+    /* background-color: gray; */
 }
 
-.Logo {
-    margin-right: 32px;
+.LogoIcon {
+    cursor: pointer;
+    background-color: red;
+    height: 100px;
 }
 
 .SearchWrapper {
@@ -53,10 +55,10 @@
     margin-left: auto;
 }
 
-.AuthIcon {
-    width: 32px;
-    height: 32px;
-    background-color: black;
+.ConnectWalletBtn {
+    padding: 8px 16px;
+    border: 1px solid #fff;
+    color: #fff;
     cursor: pointer;
     margin-left: auto;
     display: inline-block;
@@ -67,6 +69,7 @@
     padding: 2px 8px;
     text-overflow: ellipsis;
     overflow: hidden;
+    color: #fff;
     width: 132px;
     transition: width 0.1s linear;
     margin-left: auto;

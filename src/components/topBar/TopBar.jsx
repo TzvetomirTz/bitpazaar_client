@@ -23,9 +23,12 @@ function TopBar() {
     (async () => {
       if(searchBarState !== "") {
         if(isAddress(searchBarState.target.value)) {
-          console.log("We've got an address!");
-          setSearchResErc721Name(await erc721Adapter.getErc721Name(signer, searchBarState.target.value));
+          setSearchResErc721Name(await erc721Adapter.getErc721Name(signer, searchBarState.target.value)); // Must be connected to wallet
+        } else {
+          setSearchResErc721Name("");
         }
+      } else {
+        setSearchResErc721Name("");
       }
     })()
   }, [searchBarState]);

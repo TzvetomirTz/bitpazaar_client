@@ -49,16 +49,30 @@
     border-top: none;
 }
 
+.AuthWrapper {
+    margin-left: auto;
+}
+
 .AuthIcon {
+    width: 32px;
+    height: 32px;
+    background-color: black;
+    cursor: pointer;
+    margin-left: auto;
+    display: inline-block;
+}
+
+.AuthAddr {
     cursor: pointer;
     padding: 2px 8px;
     text-overflow: ellipsis;
     overflow: hidden;
     width: 132px;
     transition: width 0.1s linear;
-    margin-left:auto
+    margin-left: auto;
+    display: inline-block;
 }
 
-.AuthIcon:hover {
+.AuthAddr:hover {
     width: 400px;
 }

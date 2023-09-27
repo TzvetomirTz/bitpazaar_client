@@ -1,12 +1,17 @@
 import erc721Abi from '../../assets/erc721Abi.json';
 import { ethers } from 'ethers';
 
-const abi = JSON.stringify(erc721Abi);
+const abi721 = JSON.stringify(erc721Abi);
 
 const getErc721Name = async (signer, address) => {
-    const contract = new ethers.Contract(address, abi, signer)
+    const contract = new ethers.Contract(address, abi721, signer);
 
-    return await contract.name();
+    try {
+        return await contract.name();
+    } catch (err) {
+        // ToDo: Handle the case when address is not an ERC721.
+        return "";
+    }
 }
 
 const erc721Adapter = {

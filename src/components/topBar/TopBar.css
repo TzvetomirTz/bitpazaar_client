@@ -42,6 +42,7 @@
 }
 
 .SearchResWrapper {
+    display: none;
     border-radius: 4px;
     margin-top: 16px;
     padding: 16px;
@@ -51,6 +52,10 @@
     background: rgba(255,255,255,0.1);
     overflow-y: scroll;
     border-top: none;
+}
+
+.SearchBar:focus + .SearchResWrapper {
+    display: block;
 }
 
 .AuthWrapper {

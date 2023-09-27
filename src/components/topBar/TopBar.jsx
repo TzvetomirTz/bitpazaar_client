@@ -53,12 +53,13 @@ function TopBar() {
     return (
       <div className="TopBar">
         <Logo className="LogoIcon" />
-        {/* <div className='SearchWrapper'>
+        <div className='SearchWrapper'>
           <input className='SearchBar' onKeyDown={searchGo} onChange={setSearchBarState}></input>
-          <div className='SearchRes'>{searchResErc721Name}</div>
-        </div> */}
+          {searchResErc721Name != "" && 
+            <div className='SearchResWrapper'>{searchResErc721Name}</div>
+          }
+        </div>
         <div className='AuthWrapper'>
-          
           {!walletConnected &&
             <div className='ConnectWalletBtn' onClick={triggerConnectWallet}>Connect Wallet</div>
           }

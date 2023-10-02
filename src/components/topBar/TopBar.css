@@ -85,12 +85,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     color: #fff;
-    width: 132px;
     transition: width 0.1s linear;
     margin-left: auto;
     display: inline-block;
-}
-
-.AuthAddr:hover {
-    width: 400px;
 }

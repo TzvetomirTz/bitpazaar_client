@@ -6,14 +6,19 @@ import erc721Adapter from '../../services/contracts/Erc721Adapter';
 import { authState } from '../../state/AuthState';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const { ethers } = require("ethers");
+import Balance from '../../services/Balance';
+
+const { ethers } = require("ethers"); // <--- the weird kid
 
 function TopBar() {
   const [searchBarState, setSearchBarState] = useState("");
   const [searchResErc721Name, setSearchResErc721Name] = useState("");
   const connectWallet = authState((state) => state.connectWallet);
   const signer = authState((state) => state.signer);
+  const provider = authState((state) => state.provider);
   const walletConnected = authState((state) => state.connected);
+  const [ethBalance, setEthBalance] = useState(0);
+  const [wethBalance, setWethBalance] = useState(0);
 
   React.useEffect(() => {
     (async () => {
@@ -35,7 +40,8 @@ function TopBar() {
 
       try {
         const signer = await provider.getSigner();
-        connectWallet(provider, signer);
+        await connectWallet(provider, signer);
+        setEthBalance(await Balance.getEthBalance(provider, signer));
       } catch(err) {
         toast.error("Can't connect wallet. Is there an authentication in your wallet provider waiting to be approved already?");
       }
@@ -43,6 +49,10 @@ function TopBar() {
       toast.error("Please install Metamask");
     }
 	}
+
+  const updateBalance = async () => {
+    setEthBalance(await Balance.getEthBalance(provider, signer));
+  }
 
   const handleKeyDown = (event) => {
     if(event.key === 'Enter') {
@@ -66,7 +76,8 @@ function TopBar() {
             <div className='ConnectWalletBtn' onClick={triggerConnectWallet}>Connect Wallet</div>
           }
           {walletConnected &&
-            <div className='AuthAddr'> {signer.address} </div>
+            // <div className='AuthAddr'> {signer.address} </div>
+            <div className='AuthAddr'> ethBalance: {ethBalance} </div>
           }
         </div>
       </div>

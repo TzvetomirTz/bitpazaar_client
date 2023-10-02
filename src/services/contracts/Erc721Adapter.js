@@ -4,6 +4,7 @@ import { ethers } from 'ethers';
 const abi721 = JSON.stringify(erc721Abi);
 
 const getErc721Name = async (signer, address) => {
+    console.log("sigr: " + signer);
     const contract = new ethers.Contract(address, abi721, signer);
 
     try {

@@ -8,7 +8,9 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Balance from '../../services/Balance';
 
-const { ethers } = require("ethers"); // <--- the weird kid
+// Weird kids section
+const { ethers } = require("ethers");
+const bigDecimal = require('js-big-decimal');
 
 function TopBar() {
   const [searchBarState, setSearchBarState] = useState("");
@@ -37,22 +39,28 @@ function TopBar() {
   async function triggerConnectWallet() {
 		if(typeof window.ethereum != 'undefined') {
 			const provider = new ethers.BrowserProvider(window.ethereum, "any");
+      let signer = null;
 
       try {
-        const signer = await provider.getSigner();
+        signer = await provider.getSigner();
         await connectWallet(provider, signer);
-        setEthBalance(await Balance.getEthBalance(provider, signer));
       } catch(err) {
         toast.error("Can't connect wallet. Is there an authentication in your wallet provider waiting to be approved already?");
       }
+
+      if (signer !== null) {
+        setEthBalance(await Balance.getEthBalance(provider, signer));
+        setWethBalance(await Balance.getWethBalance(provider, signer));
+      }
 		} else {
       toast.error("Please install Metamask");
-    }
+    }    
 	}
 
-  const updateBalance = async () => {
-    setEthBalance(await Balance.getEthBalance(provider, signer));
-  }
+  //TODO: Fix stale auth state
+  // const updateBalance = async () => {
+  //   setEthBalance(await Balance.getEthBalance(provider, signer));
+  // }
 
   const handleKeyDown = (event) => {
     if(event.key === 'Enter') {
@@ -62,26 +70,25 @@ function TopBar() {
     }
   }
 
-    return (
-      <div className="TopBar">
-        <Logo className="LogoIcon" />
-        <div className='SearchWrapper'>
-          <input className='SearchBar' onKeyDown={handleKeyDown} onChange={setSearchBarState}></input>
-          {searchResErc721Name !== "" && 
-            <div className='SearchResWrapper'>{searchResErc721Name}</div>
-          }
-        </div>
-        <div className='AuthWrapper'>
-          {!walletConnected &&
-            <div className='ConnectWalletBtn' onClick={triggerConnectWallet}>Connect Wallet</div>
-          }
-          {walletConnected &&
-            // <div className='AuthAddr'> {signer.address} </div>
-            <div className='AuthAddr'> ethBalance: {ethBalance} </div>
-          }
-        </div>
+  return (
+    <div className="TopBar">
+      <Logo className="LogoIcon" />
+      <div className='SearchWrapper'>
+        <input className='SearchBar' onKeyDown={handleKeyDown} onChange={setSearchBarState}></input>
+        {searchResErc721Name !== "" && 
+          <div className='SearchResWrapper'>{searchResErc721Name}</div>
+        }
       </div>
-    );
-  }
+      <div className='AuthWrapper'>
+        {!walletConnected &&
+          <div className='ConnectWalletBtn' onClick={triggerConnectWallet}>Connect Wallet</div>
+        }
+        {walletConnected &&
+          <div className='AuthAddr'> ETH: {ethBalance} | WETH: {wethBalance}</div>
+        }
+      </div>
+    </div>
+  );
+}
 
-  export default TopBar;
+export default TopBar;

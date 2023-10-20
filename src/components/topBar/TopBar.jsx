@@ -14,7 +14,7 @@ const { ethers } = require("ethers");
 
 function TopBar() {
   const [searchBarState, setSearchBarState] = useState("");
-  const [searchResErc721Name, setSearchResErc721Name] = useState("");
+  const [searchResName, setSearchResName] = useState("");
   const connectWallet = authState((state) => state.connectWallet);
   const signer = authState((state) => state.signer);
   // const provider = authState((state) => state.provider);
@@ -26,12 +26,12 @@ function TopBar() {
     (async () => {
       if(searchBarState !== "") {
         if(isAddress(searchBarState.target.value)) {
-          setSearchResErc721Name(await erc721Adapter.getErc721Name(signer, searchBarState.target.value)); // Must be connected to wallet
+          setSearchResName(await erc721Adapter.getErc721Name(signer, searchBarState.target.value)); // Must be connected to wallet
         } else {
-          setSearchResErc721Name("");
+          setSearchResName("");
         }
       } else {
-        setSearchResErc721Name("");
+        setSearchResName("");
       }
     })()
   }, [searchBarState, signer]);
@@ -75,8 +75,10 @@ function TopBar() {
       <Logo className="LogoIcon" />
       <div className='SearchWrapper'>
         <input className='SearchBar' onKeyDown={handleKeyDown} onChange={setSearchBarState}></input>
-        {searchResErc721Name !== "" && 
-          <div className='SearchResWrapper'>{searchResErc721Name}</div>
+        {searchResName !== "" && 
+          <div className='SearchResWrapper'>
+            <div className='SearchRes'>{searchResName}</div>
+          </div>
         }
       </div>
       <div className='AuthWrapper'>

@@ -7,6 +7,7 @@
     backdrop-filter: blur(16px);
     height: 64px;
     /* background-color: purple; */
+    white-space: nowrap;
 }
 
 .LogoIcon {
@@ -36,6 +37,7 @@
     color: #fff;
     font-family: 'Noto Sans Mono', monospace;
     font-weight: 500;
+    border: 1px solid transparent;
 }
 
 .SearchBar:focus {
@@ -53,7 +55,7 @@
     position: absolute;
     background: rgba(255,255,255,0.1);
     overflow-y: scroll;
-    border-top: none;
+    border: 1px solid #fff;
 }
 
 .SearchBar:focus + .SearchResWrapper {
@@ -94,6 +96,7 @@
     font-family: 'Noto Sans Mono', monospace;
     /* border: 2px solid #fff; */
     border-radius: 100px;
+    white-space: nowrap;
 }
 
 .EthBal {

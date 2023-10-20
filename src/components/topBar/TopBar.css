@@ -6,6 +6,7 @@
     background: rgba(0,0,0,0.5);
     backdrop-filter: blur(16px);
     height: 64px;
+    /* background-color: purple; */
 }
 
 .LogoIcon {
@@ -34,11 +35,12 @@
     text-overflow: ellipsis;
     color: #fff;
     font-family: 'Noto Sans Mono', monospace;
-    font-weight: 700;
+    font-weight: 500;
 }
 
 .SearchBar:focus {
     outline: none;
+    border: 1px solid #fff;
 }
 
 .SearchResWrapper {
@@ -79,13 +81,54 @@
     box-shadow: inset 0px 0px 0px 1px #fff;
 }
 
-.AuthAddr {
+.Balances {
     cursor: pointer;
-    padding: 2px 8px;
+    padding: 2px 10px;
     text-overflow: ellipsis;
     overflow: hidden;
     color: #fff;
     transition: width 0.1s linear;
     margin-left: auto;
     display: inline-block;
+    vertical-align: middle;
+    font-family: 'Noto Sans Mono', monospace;
+    /* border: 2px solid #fff; */
+    border-radius: 100px;
+}
+
+.EthBal {
+    display: inline-block;
+    padding: 2px 10px;
+    /* border-right: 2px solid #fff; */
+    border: 1px solid #fff;
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+}
+
+.WethBal {
+    display: inline-block;
+    padding: 2px 10px;
+    border: 1px solid #fff;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    border-left: none;
+}
+
+.EthBal:hover, .WethBal:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+
+.ProfileIcon {
+    display: inline-block;
+    vertical-align: middle;
+    height: 30px;
+    width: 30px;
+    border: 2px solid #fff;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+.ProfileIcon:hover {
+    background: rgba(255,255,255,0.1);
 }

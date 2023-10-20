@@ -10,14 +10,14 @@ import Balance from '../../services/Balance';
 
 // Weird kids section
 const { ethers } = require("ethers");
-const bigDecimal = require('js-big-decimal');
+// const bigDecimal = require('js-big-decimal');
 
 function TopBar() {
   const [searchBarState, setSearchBarState] = useState("");
   const [searchResErc721Name, setSearchResErc721Name] = useState("");
   const connectWallet = authState((state) => state.connectWallet);
   const signer = authState((state) => state.signer);
-  const provider = authState((state) => state.provider);
+  // const provider = authState((state) => state.provider);
   const walletConnected = authState((state) => state.connected);
   const [ethBalance, setEthBalance] = useState(0);
   const [wethBalance, setWethBalance] = useState(0);
@@ -49,8 +49,8 @@ function TopBar() {
       }
 
       if (signer !== null) {
-        setEthBalance(await Balance.getEthBalance(provider, signer));
-        setWethBalance(await Balance.getWethBalance(provider, signer));
+        setEthBalance(Number(await Balance.getEthBalance(provider, signer)).toFixed(4));
+        setWethBalance(Number(await Balance.getWethBalance(provider, signer)).toFixed(4));
       }
 		} else {
       toast.error("Please install Metamask");
@@ -84,7 +84,13 @@ function TopBar() {
           <div className='ConnectWalletBtn' onClick={triggerConnectWallet}>Connect Wallet</div>
         }
         {walletConnected &&
-          <div className='AuthAddr'> ETH: {ethBalance} | WETH: {wethBalance}</div>
+          <div className='Balances'>
+            <div className='EthBal'>ETH: {ethBalance}</div>
+            <div className='WethBal'>WETH: {wethBalance}</div>
+          </div>
+        }
+        {walletConnected &&
+          <div className='ProfileIcon'></div>
         }
       </div>
     </div>

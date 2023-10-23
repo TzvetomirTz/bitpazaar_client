@@ -1,17 +1,19 @@
 import './TopBar.css';
 import Logo from '../logo/Logo';
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { isAddress } from 'web3-validator';
 import erc721Adapter from '../../services/contracts/Erc721Adapter';
 import { authState } from '../../state/AuthState';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Balance from '../../services/Balance';
+import {useNavigate} from 'react-router-dom';
 
 // Weird kids section
 const { ethers } = require("ethers");
 
 function TopBar() {
+  const navigate = useNavigate();
   const [searchBarState, setSearchBarState] = useState("");
   const [searchResName, setSearchResName] = useState("");
   const connectWallet = authState((state) => state.connectWallet);
@@ -66,9 +68,15 @@ function TopBar() {
     }
   }
 
+  const goToHomePage = useCallback(
+      () => navigate('/', {replace: true}), [navigate]
+    );
+
   return (
     <div className="TopBar">
-      <Logo className="LogoIcon" />
+      <div className="LogoIcon" onClick={goToHomePage}>
+        <Logo />
+      </div>
       <div className='SearchWrapper'>
         <input className='SearchBar' onKeyDown={handleKeyDown} onChange={setSearchBarState}></input>
         {searchResName !== "" && 

@@ -10,7 +10,6 @@ import Balance from '../../services/Balance';
 
 // Weird kids section
 const { ethers } = require("ethers");
-// const bigDecimal = require('js-big-decimal');
 
 function TopBar() {
   const [searchBarState, setSearchBarState] = useState("");
@@ -18,7 +17,7 @@ function TopBar() {
   const connectWallet = authState((state) => state.connectWallet);
   const signer = authState((state) => state.signer);
   // const provider = authState((state) => state.provider);
-  const walletConnected = authState((state) => state.connected);
+  const walletConnected = authState((state) => state.walletConnected);
   const [ethBalance, setEthBalance] = useState(0);
   const [wethBalance, setWethBalance] = useState(0);
 
@@ -44,22 +43,19 @@ function TopBar() {
       try {
         signer = await provider.getSigner();
         await connectWallet(provider, signer);
-      } catch(err) {
-        toast.error("Can't connect wallet. Is there an authentication in your wallet provider waiting to be approved already?");
-      }
-
-      if (signer !== null) {
         setEthBalance(Number(await Balance.getEthBalance(provider, signer)).toFixed(4));
         setWethBalance(Number(await Balance.getWethBalance(provider, signer)).toFixed(4));
+      } catch(err) {
+        toast.error("Can't connect wallet. Is there an authentication in your wallet provider waiting to be approved already?");
       }
 		} else {
       toast.error("Please install Metamask");
     }    
 	}
 
-  //TODO: Fix stale auth state
   // const updateBalance = async () => {
-  //   setEthBalance(await Balance.getEthBalance(provider, signer));
+  //   setEthBalance(Number(await Balance.getEthBalance(provider, signer)).toFixed(4));
+  //   setWethBalance(Number(await Balance.getWethBalance(provider, signer)).toFixed(4));
   // }
 
   const handleKeyDown = (event) => {

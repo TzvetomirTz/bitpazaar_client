@@ -2,7 +2,10 @@ import TopBar from "../../components/topBar/TopBar";
 
 function HomePage() {
   return (
-    <TopBar />
+    <div>
+      <TopBar />
+      <div>HOME PAGE</div>
+    </div>
   );
 }
 

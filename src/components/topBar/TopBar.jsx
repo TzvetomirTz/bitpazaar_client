@@ -69,8 +69,24 @@ function TopBar() {
   }
 
   const goToHomePage = useCallback(
-      () => navigate('/', {replace: true}), [navigate]
-    );
+    () => {
+      const redirPath = '/';
+
+      if(redirPath !== window.location.pathname) {
+        navigate(redirPath, {replace: false});
+      }
+    }, [navigate]
+  );
+
+  const goToProfilePage = useCallback(
+    async () => {
+      const redirPath = '/profile/' + await signer.getAddress();
+
+      if(redirPath !== window.location.pathname) {
+        navigate(redirPath, {replace: false});
+      }
+    }, [navigate, signer]
+  );
 
   return (
     <div className="TopBar">
@@ -96,7 +112,7 @@ function TopBar() {
           </div>
         }
         {walletConnected &&
-          <div className='ProfileIcon'></div>
+          <div className='ProfileIcon' onClick={goToProfilePage}></div>
         }
       </div>
     </div>

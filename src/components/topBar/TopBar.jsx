@@ -18,10 +18,18 @@ function TopBar() {
   const [searchResName, setSearchResName] = useState("");
   const connectWallet = authState((state) => state.connectWallet);
   const signer = authState((state) => state.signer);
-  // const provider = authState((state) => state.provider);
+  const provider = authState((state) => state.provider);
   const walletConnected = authState((state) => state.walletConnected);
   const [ethBalance, setEthBalance] = useState(0);
   const [wethBalance, setWethBalance] = useState(0);
+
+  React.useEffect(() => {
+    (async () => {
+      if(walletConnected) {
+        updateBalance();
+      }
+    })()
+  }, [, walletConnected]);
 
   React.useEffect(() => {
     (async () => {
@@ -55,10 +63,10 @@ function TopBar() {
     }    
 	}
 
-  // const updateBalance = async () => {
-  //   setEthBalance(Number(await Balance.getEthBalance(provider, signer)).toFixed(4));
-  //   setWethBalance(Number(await Balance.getWethBalance(provider, signer)).toFixed(4));
-  // }
+  const updateBalance = async () => {
+    setEthBalance(Number(await Balance.getEthBalance(provider, signer)).toFixed(4));
+    setWethBalance(Number(await Balance.getWethBalance(provider, signer)).toFixed(4));
+  }
 
   const handleKeyDown = (event) => {
     if(event.key === 'Enter') {

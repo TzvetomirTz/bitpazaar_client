@@ -20,8 +20,8 @@ function TopBar() {
   const signer = authState((state) => state.signer);
   const provider = authState((state) => state.provider);
   const walletConnected = authState((state) => state.walletConnected);
-  const [ethBalance, setEthBalance] = useState(0);
-  const [wethBalance, setWethBalance] = useState(0);
+  const [ethBalance, setEthBalance] = useState("0.0000");
+  const [wethBalance, setWethBalance] = useState("0.0000");
 
   React.useEffect(() => {
     (async () => {
@@ -29,7 +29,7 @@ function TopBar() {
         updateBalance();
       }
     })()
-  }, [, walletConnected]);
+  }, [walletConnected]);
 
   React.useEffect(() => {
     (async () => {
@@ -60,7 +60,7 @@ function TopBar() {
       }
 		} else {
       toast.error("Please install Metamask");
-    }    
+    }
 	}
 
   const updateBalance = async () => {

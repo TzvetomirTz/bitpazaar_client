@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Balance from '../../services/Balance';
 import {useNavigate} from 'react-router-dom';
+import Authentication from '../../services/Authentication';
 
 // Weird kids section
 const { ethers } = require("ethers");
@@ -16,7 +17,7 @@ function TopBar() {
   const navigate = useNavigate();
   const [searchBarState, setSearchBarState] = useState("");
   const [searchResName, setSearchResName] = useState("");
-  const connectWallet = authState((state) => state.connectWallet);
+  const stateConnectWallet = authState((state) => state.connectWallet);
   const signer = authState((state) => state.signer);
   const provider = authState((state) => state.provider);
   const walletConnected = authState((state) => state.walletConnected);
@@ -46,13 +47,10 @@ function TopBar() {
   }, [searchBarState, signer]);
 
   async function triggerConnectWallet() {
-		if(typeof window.ethereum != 'undefined') {
-			const provider = new ethers.BrowserProvider(window.ethereum, "any");
-      let signer = null;
-
+		if(typeof window.ethereum !== 'undefined') {
       try {
-        signer = await provider.getSigner();
-        await connectWallet(provider, signer);
+        await Authentication.connectWallet(stateConnectWallet);
+
         setEthBalance(Number(await Balance.getEthBalance(provider, signer)).toFixed(4));
         setWethBalance(Number(await Balance.getWethBalance(provider, signer)).toFixed(4));
       } catch(err) {

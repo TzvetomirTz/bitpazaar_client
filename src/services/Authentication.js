@@ -1,7 +1,16 @@
+const { ethers } = require("ethers");
+
+const connectWallet = async (stateConnectWallet) => {
+    const provider = new ethers.BrowserProvider(window.ethereum, "any");
+			let signer = null;
+
+			signer = await provider.getSigner();
+			await stateConnectWallet(provider, signer);
+}
 
 const authenticate = async (provider, signer) => {
     const domain = {
-        name: 'BitPazaar Login',
+        name: 'BitPazaar',
         version: '1.0.0',
         chainId: (await provider.getNetwork()).chainId
       };
@@ -16,8 +25,7 @@ const authenticate = async (provider, signer) => {
   
       const authPayload = {
         signer: await signer.getAddress(),
-        action: 'auth',
-        app: 'BitPazaar'
+        action: 'auth'
       };
   
       const signature = await signer.signTypedData(domain, types, authPayload);
@@ -29,6 +37,7 @@ const authenticate = async (provider, signer) => {
 
 
 const Authentication = {
+    connectWallet,
     authenticate
 }
 

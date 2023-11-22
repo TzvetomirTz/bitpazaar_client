@@ -18,6 +18,8 @@ function TopBar() {
   const [searchBarState, setSearchBarState] = useState("");
   const [searchResName, setSearchResName] = useState("");
   const stateConnectWallet = authState((state) => state.connectWallet);
+  const authenticateToBackend = authState((state) => state.authenticateToBackend);
+  const authenticatedToBackend = authState((state) => state.authenticatedToBackend);
   const signer = authState((state) => state.signer);
   const provider = authState((state) => state.provider);
   const walletConnected = authState((state) => state.walletConnected);
@@ -47,7 +49,7 @@ function TopBar() {
   }, [searchBarState, signer]);
 
   async function triggerConnectWallet() {
-		if(typeof window.ethereum !== 'undefined') {
+		if(typeof window.ethereum != 'undefined') {
       try {
         await Authentication.connectWallet(stateConnectWallet);
 
@@ -94,6 +96,11 @@ function TopBar() {
     }, [navigate, signer]
   );
 
+  const authToBackend = async () => {
+    const accKey = await Authentication.authenticate(provider, signer);
+    authenticateToBackend(accKey);
+  };
+
   return (
     <div className="TopBar">
       <div className="LogoIcon" onClick={goToHomePage}>
@@ -110,6 +117,11 @@ function TopBar() {
       <div className='AuthWrapper'>
         {!walletConnected &&
           <div className='ConnectWalletBtn' onClick={triggerConnectWallet}>Connect Wallet</div>
+        }
+        {walletConnected && !authenticatedToBackend &&
+          <div className='authToBackendBtn' onClick={authToBackend}>
+            Authenticate To Backend
+          </div>
         }
         {walletConnected &&
           <div className='Balances'>

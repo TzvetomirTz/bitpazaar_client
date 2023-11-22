@@ -61,6 +61,7 @@
     background: rgba(255,255,255,0.1);
     overflow-y: scroll;
     border: 1px solid #fff;
+    box-shadow: 0 0 3px #fff, inset 0 0 3px #fff;
 }
 
 .SearchBar:focus + .SearchResWrapper {
@@ -72,13 +73,16 @@
 }
 
 .ConnectWalletBtn {
-    padding: 8px 16px;
+    padding: 4px 8px;
     border: 1px solid #fff;
     border-radius: 4px;
     color: #fff;
     cursor: pointer;
     margin-left: auto;
     display: inline-block;
+    -webkit-user-select: none;
+    user-select: none;
+    font-family: 'Noto Sans Mono', monospace;
 }
 
 .ConnectWalletBtn:hover {
@@ -133,7 +137,6 @@
     box-shadow: 0 0 3px #fff, inset 0 0 3px #fff;
 }
 
-
 .ProfileIcon {
     display: inline-block;
     vertical-align: middle;
@@ -146,6 +149,26 @@
 }
 
 .ProfileIcon:hover {
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 0 3px #fff, inset 0 0 3px #fff;
+}
+
+.authToBackendBtn {
+    color: #fff;
+    margin-left: auto;
+    display: inline-block;
+    vertical-align: middle;
+    font-family: 'Noto Sans Mono', monospace;
+    padding: 2px 10px;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    user-select: none;
+    transition-duration: 0.1s;
+}
+
+.authToBackendBtn:hover {
+    cursor: pointer;
     background: rgba(255,255,255,0.1);
     box-shadow: 0 0 3px #fff, inset 0 0 3px #fff;
 }

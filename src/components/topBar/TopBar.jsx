@@ -126,6 +126,7 @@ function TopBar() {
         {walletConnected &&
           <div className='Balances'>
             <div className='EthBal'>ETH: {ethBalance}</div>
+            <div className='TokenSwapIcon'>SWAP</div>
             <div className='WethBal'>WETH: {wethBalance}</div>
           </div>
         }

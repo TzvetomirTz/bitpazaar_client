@@ -132,7 +132,14 @@
     user-select: none;
 }
 
-.EthBal:hover, .WethBal:hover {
+.TokenSwapIcon {
+    display: inline-block;
+    padding: 2px 10px;
+    border: 1px solid #fff;
+    border-left: none;
+}
+
+.EthBal:hover, .WethBal:hover, .TokenSwapIcon:hover {
     background: rgba(255,255,255,0.1);
     box-shadow: 0 0 3px #fff, inset 0 0 3px #fff;
 }

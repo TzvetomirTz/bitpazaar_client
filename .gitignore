@@ -2,3 +2,4 @@ node_modules
 
 # Funny part starts here
 .env
+.DS_Store

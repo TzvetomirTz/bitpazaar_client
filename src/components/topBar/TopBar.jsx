@@ -7,11 +7,8 @@ import { authState } from '../../state/AuthState';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Balance from '../../services/Balance';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Authentication from '../../services/Authentication';
-
-// Weird kids section
-const { ethers } = require("ethers");
 
 function TopBar() {
   const navigate = useNavigate();
@@ -48,7 +45,7 @@ function TopBar() {
     })()
   }, [searchBarState, signer]);
 
-  async function triggerConnectWallet() {
+  const triggerConnectWallet = async () => {
 		if(typeof window.ethereum != 'undefined') {
       try {
         await Authentication.connectWallet(stateConnectWallet);
@@ -97,8 +94,9 @@ function TopBar() {
   );
 
   const authToBackend = async () => {
-    const accKey = await Authentication.authenticate(provider, signer);
-    authenticateToBackend(accKey);
+    const accToken = await Authentication.getAcsToken(provider, signer);
+    console.log(accToken);
+    authenticateToBackend(accToken);
   };
 
   return (

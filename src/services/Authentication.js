@@ -1,7 +1,5 @@
-import axios from 'axios';
-const { ethers } = require("ethers");
-
-const authLambdaUrl = process.env.REACT_APP_AUTH_URL;
+const { ethers } = require('ethers');
+const AuthClient = require('../clients/AuthClient').default;
 
 const connectWallet = async (stateConnectWallet) => {
     const provider = new ethers.BrowserProvider(window.ethereum, "any");
@@ -11,7 +9,7 @@ const connectWallet = async (stateConnectWallet) => {
 			await stateConnectWallet(provider, signer);
 }
 
-const authenticate = async (provider, signer) => {
+const getAcsToken = async (provider, signer) => {
     const domain = {
         name: 'BitPazaar',
         chainId: (await provider.getNetwork()).chainId
@@ -25,35 +23,23 @@ const authenticate = async (provider, signer) => {
         ]
     };
 
+    const ogTs = new Date().getTime();
+    const action = 'auth';
+    const wltAddr = await signer.getAddress();
+
     const authPayload = {
-        wltAddr: await signer.getAddress(),
-        action: 'auth',
-        ogTs: new Date().getTime()
+        wltAddr,
+        action,
+        ogTs
     };
 
     const signature = await signer.signTypedData(domain, types, authPayload);
-
-    console.log(signature);
-    console.log(authLambdaUrl);
-    console.log(JSON.stringify({...authPayload, signature}));
-
-    // const res = await axios.get("https://www.google.com/");
-    // const axiosInstance = axios.create({baseURL: authLambdaUrl});
-    let res = await axios.get(authLambdaUrl, {params: {...authPayload, signature}}).then((res) => {
-        console.log("Got res: " + JSON.stringify(res));
-    }).catch((err) => {
-        console.log(err)
-    });
-
-    console.log(JSON.stringify(res));
-
-    return "__ACCESS_KEY__";
+    return await AuthClient.getAcsToken(wltAddr, action, ogTs, signature);
 }
-
 
 const Authentication = {
     connectWallet,
-    authenticate
+    getAcsToken
 }
 
 export default Authentication;

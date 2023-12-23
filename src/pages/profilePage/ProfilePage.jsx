@@ -1,13 +1,22 @@
+import './ProfilePage.css';
 import TopBar from "../../components/topBar/TopBar";
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 function ProfilePage() {
-  const {profileAddress} = useParams();
+  const { profileAddress } = useParams();
 
   return (
-    <div>
+    <div className='ProfilePage'>
       <TopBar />
-      <div>PROFILE PAGE: {profileAddress}</div>
+      <div className="ProfileContainer">
+        <div className='ProfileHeader'>
+          <div className='ProfilePic'></div>
+          <div className='ProfileAddress'>{ profileAddress }</div>
+        </div>
+        <div className='ProfileBody'>
+          
+        </div>
+      </div>
     </div>
   );
 }

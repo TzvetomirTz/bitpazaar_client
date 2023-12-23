@@ -1,0 +1,50 @@
+.ProfilePage {
+    display: flexbox;
+}
+
+.ProfileContainer {
+    display: flex;
+    margin: 100px;
+    flex-direction: column;
+}
+
+.ProfileHeader, .ProfileBody {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    backdrop-filter: blur(16px);
+    background: rgba(0,0,0,0.5);
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.ProfilePic {
+    width: 200px;
+    height: 200px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(16px);
+    display: inline-block;
+}
+
+.ProfilePic:hover {
+    cursor: pointer;
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 0 5px #fff, inset 0 0 5px #fff;
+}
+
+.ProfileAddress {
+    display: flex;
+    font-family: 'Noto Sans Mono', monospace;
+    font-size: 32px;
+    color: #fff;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 50px;
+}
+
+.ProfileBody {
+    
+}

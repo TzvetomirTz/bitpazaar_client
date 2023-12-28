@@ -46,10 +46,12 @@
 }
 
 .ProfileBody {
-    
+    display: flexbox;
+    flex-direction: column;
 }
 
 .ProfileSectionTitle {
     font-family: 'Noto Sans Mono', monospace;
     color: #fff;
+    display: flexbox;
 }

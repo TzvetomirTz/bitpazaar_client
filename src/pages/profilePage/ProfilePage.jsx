@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ProfileClient from '../../clients/ProfileClient';
 import { authState } from '../../state/AuthState';
+import NftList from '../../components/nftList/NftList';
 
 function ProfilePage() {
   const { profileAddress } = useParams();
@@ -35,7 +36,8 @@ function ProfilePage() {
           <div className='ProfileAddress'>{ profileAddress }</div>
         </div>
         <div className='ProfileBody'>
-          <div className='ProfileSectionTitle'>NFTS ({hmNftsOwned}):</div>
+          <div className='ProfileSectionTitle'>NFTS ({ hmNftsOwned }):</div>
+          <NftList className="NftList" nfts={ ownedNfts }/>
         </div>
       </div>
     </div>

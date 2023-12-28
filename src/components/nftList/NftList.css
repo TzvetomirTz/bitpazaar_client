@@ -1,0 +1,25 @@
+.NftList {
+    display: flex;
+    font-family: 'Noto Sans Mono', monospace;
+    color: #fff;
+    padding: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.NtfWrapper {
+    display: flexbox;
+    border: 1px solid #fff;
+    width: 170px;
+    margin: 10px;
+    flex-direction: row;
+    padding: 10px;
+}
+
+.NftThumbnail {
+    height: 150px;
+    width: 150px;
+    margin: 10px;
+    border: 1px solid #fff;
+    display: flexbox;
+}

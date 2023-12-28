@@ -48,3 +48,8 @@
 .ProfileBody {
     
 }
+
+.ProfileSectionTitle {
+    font-family: 'Noto Sans Mono', monospace;
+    color: #fff;
+}

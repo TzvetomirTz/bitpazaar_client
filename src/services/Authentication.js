@@ -9,7 +9,7 @@ const connectWallet = async (stateConnectWallet) => {
 			await stateConnectWallet(provider, signer);
 }
 
-const getAcsToken = async (provider, signer) => {
+const generateAcsToken = async (provider, signer) => {
     const domain = {
         name: 'BitPazaar',
         chainId: (await provider.getNetwork()).chainId
@@ -39,7 +39,7 @@ const getAcsToken = async (provider, signer) => {
 
 const Authentication = {
     connectWallet,
-    getAcsToken
+    generateAcsToken
 }
 
 export default Authentication;

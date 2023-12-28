@@ -94,8 +94,8 @@ function TopBar() {
   );
 
   const authToBackend = async () => {
-    const accToken = await Authentication.getAcsToken(provider, signer);
-    console.log(accToken);
+    const accToken = await Authentication.generateAcsToken(provider, signer);
+    console.log(accToken); // ToDo: delete this at some point lol
     authenticateToBackend(accToken);
   };
 

@@ -8,7 +8,7 @@ const getAcsToken = async (wltAddr, action, ogTs, signature) => {
     let res = await axios.get(authLambdaUrl, { params }).then((res) => {
         return res;
     }).catch((err) => {
-        console.log(err)
+        throw err;
     });
 
     return res.data.acsToken;

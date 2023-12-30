@@ -5,33 +5,35 @@ function NftList(props) {
 
     const renderNfts = () => {
         let elemnents = []
-        let currentCollection = ""
-
+        let collections = {}
+        
         nfts.map((n) => {
-            if(separateByCollection && currentCollection !== n.collection.name) {
-                elemnents.push(<div className='CollectionTitle'>
-                    {n.collection.name}
-                </div>)
+            if(collections[n.collection.name] === undefined) { collections[n.collection.name] = [] }
+            collections[n.collection.name].push(n)
+        })
 
-                currentCollection = n.collection.name
-            }
-
-            elemnents.push(
-            <div className='NtfWrapper'>
-                <div className='NftThumbnail'></div>
-                {!separateByCollection && <div className='NftCollectionName'>{n.collection.name}</div>}
-                <div className='NftId'>{n.tokenId}</div>
+        Object.keys(collections).map((c) => {
+            elemnents.push(<div className='CollectionWrapper'>
+                <div className='CollectionTitle'>{c}</div>
+                <div className='CollectionNftsWrapper'>
+                    {collections[c].map((n) => {
+                        return <div className='NtfWrapper'>
+                            <img className='NftThumbnail' src={n.image.cachedUrl}></img>
+                        <div className='NftId'>{n.tokenId}</div>
+                    </div>
+                    })}
+                </div>
             </div>)
-        });
+        })
 
         return elemnents
-    };
+    }
 
     return (
         <div className='NftList'>
             { renderNfts() }
         </div>
-    );
+    )
 }
 
 export default NftList

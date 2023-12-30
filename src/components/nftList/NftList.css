@@ -3,13 +3,23 @@
     font-family: 'Noto Sans Mono', monospace;
     color: #fff;
     padding: 20px;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
 }
 
+.CollectionWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
 .CollectionTitle {
     display: flexbox;
+}
+
+.CollectionNftsWrapper {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .NtfWrapper {

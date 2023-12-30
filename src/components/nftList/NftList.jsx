@@ -1,15 +1,30 @@
-import './NftList.css';
+import './NftList.css'
 
 function NftList(props) {
-    const { nfts } = props;
+    const { nfts, separateByCollection } = props
 
     const renderNfts = () => {
-        return nfts.map((n) => {
-            return <div className='NtfWrapper'>
+        let elemnents = []
+        let currentCollection = ""
+
+        nfts.map((n) => {
+            if(separateByCollection && currentCollection !== n.collection.name) {
+                elemnents.push(<div className='CollectionTitle'>
+                    {n.collection.name}
+                </div>)
+
+                currentCollection = n.collection.name
+            }
+
+            elemnents.push(
+            <div className='NtfWrapper'>
                 <div className='NftThumbnail'></div>
-                <div className='NftCollectionName'>{n.collection.name}</div>
+                {!separateByCollection && <div className='NftCollectionName'>{n.collection.name}</div>}
                 <div className='NftId'>{n.tokenId}</div>
-            </div>});
+            </div>)
+        });
+
+        return elemnents
     };
 
     return (
@@ -19,4 +34,4 @@ function NftList(props) {
     );
 }
 
-export default NftList;
+export default NftList

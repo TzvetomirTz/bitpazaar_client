@@ -37,7 +37,7 @@ function ProfilePage() {
         </div>
         <div className='ProfileBody'>
           <div className='ProfileSectionTitle'>NFTS ({ hmNftsOwned }):</div>
-          <NftList className="NftList" nfts={ ownedNfts }/>
+          <NftList className="NftList" nfts={ ownedNfts } separateByCollection={true} />
         </div>
       </div>
     </div>

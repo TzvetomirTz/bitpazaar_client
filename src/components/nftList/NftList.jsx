@@ -1,4 +1,5 @@
 import './NftList.css'
+import MediaSquare from '../MediaSquare/MediaSquare'
 
 function NftList(props) {
     const { nfts, separateByCollection } = props
@@ -18,9 +19,9 @@ function NftList(props) {
                 <div className='CollectionNftsWrapper'>
                     {collections[c].map((n) => {
                         return <div className='NtfWrapper'>
-                            <img className='NftThumbnail' src={n.image.cachedUrl}></img>
-                        <div className='NftId'>{n.tokenId}</div>
-                    </div>
+                            <MediaSquare nft={n} />
+                            <div className='NftId'>{n.tokenId}</div>
+                        </div>
                     })}
                 </div>
             </div>)

@@ -1,0 +1,10 @@
+.MediaSquare {
+    display: flexbox;
+    height: 150px;
+    width: 150px;
+}
+
+.Thumbnail {
+    height: 170px;
+    width: 170px;
+}

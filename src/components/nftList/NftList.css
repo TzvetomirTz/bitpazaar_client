@@ -27,7 +27,9 @@
     border: 1px solid #fff;
     width: 170px;
     margin: 10px;
-    flex-direction: row;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
     padding: 10px;
     height: 250px;
 }

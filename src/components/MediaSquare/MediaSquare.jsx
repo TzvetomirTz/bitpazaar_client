@@ -8,7 +8,7 @@ function MediaSquare(props) {
             if(nft.image.contentType.startsWith('image')) {
                 return <img className='Thumbnail' src={ nft.image.cachedUrl } />
             } else if (nft.image.contentType === 'video/mp4') {
-                return <video src={ nft.image.cachedUrl } autoPlay={ true } className='Thumbnail' />
+                return <video src={ nft.image.cachedUrl } autoPlay={ true } loop={ true } className='Thumbnail' />
             } else {
                 return <div></div>
             }

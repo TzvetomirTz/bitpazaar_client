@@ -1,5 +1,5 @@
 import './Logo.css';
-import { ReactComponent as BpLogo } from '../../assets/BP_Logo.svg';
+import { ReactComponent as BpLogo } from '../../assets/BP_Circle_Logo.svg';
 
 function Logo() {
   return (

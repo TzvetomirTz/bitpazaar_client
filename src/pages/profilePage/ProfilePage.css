@@ -4,27 +4,27 @@
 
 .ProfileContainer {
     display: flex;
-    margin: 100px;
     flex-direction: column;
 }
 
 .ProfileHeader, .ProfileBody {
+    margin-top: 64px;
     width: 100%;
     display: flex;
     flex-direction: row;
+    background: rgba(0,0,0,0.1);
     backdrop-filter: blur(16px);
-    background: rgba(0,0,0,0.5);
     border-radius: 4px;
-    padding: 10px;
+    padding: 20px;
     margin-bottom: 10px;
 }
 
 .ProfilePic {
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
     border: 3px solid #fff;
     border-radius: 50%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.1);
     backdrop-filter: blur(16px);
     display: inline-block;
 }
@@ -42,7 +42,7 @@
     color: #fff;
     margin-top: auto;
     margin-bottom: auto;
-    margin-left: 50px;
+    margin-left: 32px;
 }
 
 .ProfileBody {

@@ -1,16 +1,20 @@
 .TopBar {
     font-family: 'Montserrat', sans-serif;
-    padding: 0px 16px;
+    /* padding: 0px 16px; */
     display: flex;
     align-items: center;
     background: rgba(0,0,0,0.1);
     backdrop-filter: blur(16px);
     height: 64px;
     white-space: nowrap;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
 }
 
 .LogoIcon {
     cursor: pointer;
+    margin-left: 16px;
 }
 
 .SearchWrapper {
@@ -37,14 +41,11 @@
     transition-duration: 0.1s;
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid #fff;
-    box-shadow: 0 0 3px #fff, inset 0 0 3px #fff;
 }
 
 .SearchBar:hover {
-    background: rgba(255, 255, 255, 0.1);
-    -webkit-box-shadow: inset 0px 0px 0px 1px #fff;
-    -moz-box-shadow: inset 0px 0px 0px 1px #fff;
-    box-shadow: inset 0px 0px 0px 1px #fff;
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 0 3px #fff, inset 0 0 3px #fff;
 }
 
 .SearchBar:focus {
@@ -158,6 +159,7 @@
     border-radius: 100px;
     cursor: pointer;
     transition-duration: 0.1s;
+    margin-right: 16px;
 }
 
 .ProfileIcon:hover {

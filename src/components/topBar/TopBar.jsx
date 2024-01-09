@@ -114,7 +114,7 @@ function TopBar() {
       </div>
       <div className='AuthWrapper'>
         {!walletConnected &&
-          <div className='ConnectWalletBtn' onClick={triggerConnectWallet}>Connect Wallet</div>
+          <div className='ConnectWalletBtn' onClick={triggerConnectWallet}>Connect</div>
         }
         {walletConnected && !authenticatedToBackend &&
           <div className='authToBackendBtn' onClick={authToBackend}>

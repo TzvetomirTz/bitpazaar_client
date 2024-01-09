@@ -1,6 +1,5 @@
 .NftList {
     display: flex;
-    font-family: 'Noto Sans Mono', monospace;
     color: #fff;
     padding: 20px;
     flex-direction: column;

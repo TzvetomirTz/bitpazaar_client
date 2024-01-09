@@ -1,12 +1,13 @@
-import TopBar from "../../components/topBar/TopBar";
+import './HomePage.css'
+import TopBar from '../../components/topBar/TopBar'
 
 function HomePage() {
   return (
-    <div>
+    <div className="HomePage">
       <TopBar />
-      <div>HOME PAGE</div>
+      <div className="HomePageContainer">HOME PAGE</div>
     </div>
-  );
+  )
 }
 
 export default HomePage;

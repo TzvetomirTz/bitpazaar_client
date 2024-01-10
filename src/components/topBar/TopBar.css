@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     background-color: #000;
-    height: 64px;
+    height: 78px;
     white-space: nowrap;
     position: fixed;
     width: 100%;
@@ -12,36 +12,36 @@
 
 .LogoIcon {
     cursor: pointer;
-    margin-left: 16px;
+    margin-left: 32px;
 }
 
 .SearchWrapper {
     align-items: center;
     justify-content: center;
-    margin-left: 64px;
+    margin-left: 256px;
 }
 
 .SearchBar {
     font-size: 16px;
     padding: 2px 16px;
-    /* border-radius: 4px; */
-    transition: width 0.1s linear;
-    width: 320px;
-    height: 40px;
+    border-radius: 12px;
+    transition: 0.1s linear;
+    width: 640px;
+    height: 30px;
     display: inline-block;
     vertical-align: middle;
     text-overflow: ellipsis;
-    color: #fff;
+    color: #EEEEEE;
     font-weight: 500;
-    border: none;
-    transition-duration: 0.1s;
-    background: #000;
-    border-bottom: 1px solid #fff;
+    border: 1px solid transparent;
+    background-color: #393E46;
+    outline: none;
 }
 
 .SearchBar:focus {
     outline: none;
-    width: 640px;
+    background-color: transparent;
+    border: 1px solid #EEEEEE;
 }
 
 .SearchResWrapper {
@@ -52,7 +52,7 @@
     width: 640px;
     height: 256px;
     position: absolute;
-    background: #000;
+    background: none;
     overflow-y: scroll;
     border: 1px solid #fff;
 }
@@ -67,9 +67,9 @@
 
 .ConnectWalletBtn {
     padding: 4px 8px;
-    border: 1px solid #fff;
+    border: 1px solid #EEEEEE;
     border-radius: 4px;
-    color: #fff;
+    color: #EEEEEE;
     cursor: pointer;
     margin-left: auto;
     margin-right: 16px;
@@ -80,62 +80,68 @@
 
 .ConnectWalletBtn:hover {
     background: rgba(255, 255, 255, 0.2);
-    -webkit-box-shadow: inset 0px 0px 0px 1px #fff;
-    -moz-box-shadow: inset 0px 0px 0px 1px #fff;
-    box-shadow: inset 0px 0px 0px 1px #fff;
+    -webkit-box-shadow: inset 0px 0px 0px 1px #EEEEEE;
+    -moz-box-shadow: inset 0px 0px 0px 1px #EEEEEE;
+    box-shadow: inset 0px 0px 0px 1px #EEEEEE;
 }
 
 .Balances {
     cursor: pointer;
-    padding: 2px 10px;
+    padding: 2px 16px;
     text-overflow: ellipsis;
     overflow: hidden;
-    color: #fff;
+    color: #EEEEEE;
     transition: width 0.1s linear;
     margin-left: auto;
     display: inline-block;
     vertical-align: middle;
-    /* border: 2px solid #fff; */
+    /* border: 2px solid #EEEEEE; */
     border-radius: 100px;
     white-space: nowrap;
 }
 
 .EthBal {
     display: inline-block;
-    padding: 2px 10px;
-    /* border-right: 2px solid #fff; */
-    border: 1px solid #fff;
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
+    padding: 2px 16px;
+    /* border-right: 2px solid #EEEEEE; */
+    border: 1px solid #EEEEEE;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
     transition-duration: 0.1s;
     -webkit-user-select: none;
     user-select: none;
+    height: 30px;
+    line-height: 30px;
 }
 
 .WethBal {
     display: inline-block;
-    padding: 2px 10px;
-    border: 1px solid #fff;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
+    padding: 2px 16px;
+    border: 1px solid #EEEEEE;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
     border-left: none;
     transition-duration: 0.1s;
     -webkit-user-select: none;
     user-select: none;
+    height: 30px;
+    line-height: 30px;
 }
 
 .TokenSwapIcon {
     display: inline-block;
-    padding: 2px 10px;
-    border: 1px solid #fff;
+    padding: 2px 16px;
+    border: 1px solid #EEEEEE;
     border-left: none;
     -webkit-user-select: none;
     user-select: none;
+    height: 30px;
+    line-height: 30px;
 }
 
 .EthBal:hover, .WethBal:hover, .TokenSwapIcon:hover {
     background: rgba(255,255,255,0.1);
-    box-shadow: 0 0 3px #fff, inset 0 0 3px #fff;
+    box-shadow: 0 0 3px #EEEEEE, inset 0 0 3px #EEEEEE;
 }
 
 .ProfileIcon {
@@ -143,25 +149,25 @@
     vertical-align: middle;
     height: 30px;
     width: 30px;
-    border: 1px solid #fff;
+    border: 1px solid #EEEEEE;
     border-radius: 100px;
     cursor: pointer;
     transition-duration: 0.1s;
-    margin-right: 16px;
+    margin-right: 32px;
 }
 
 .ProfileIcon:hover {
     background: rgba(255,255,255,0.1);
-    box-shadow: 0 0 3px #fff, inset 0 0 3px #fff;
+    box-shadow: 0 0 3px #EEEEEE, inset 0 0 3px #EEEEEE;
 }
 
 .authToBackendBtn {
-    color: #fff;
+    color: #EEEEEE;
     margin-left: auto;
     display: inline-block;
     vertical-align: middle;
     padding: 2px 10px;
-    border: 1px solid #fff;
+    border: 1px solid #EEEEEE;
     border-radius: 4px;
     -webkit-user-select: none;
     user-select: none;
@@ -171,5 +177,5 @@
 .authToBackendBtn:hover {
     cursor: pointer;
     background: rgba(255,255,255,0.1);
-    box-shadow: 0 0 3px #fff, inset 0 0 3px #fff;
+    box-shadow: 0 0 3px #EEEEEE, inset 0 0 3px #EEEEEE;
 }

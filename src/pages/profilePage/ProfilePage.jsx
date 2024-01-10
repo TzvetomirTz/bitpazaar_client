@@ -35,10 +35,10 @@ function ProfilePage() {
           <div className='ProfilePic'></div>
           <div className='ProfileAddress'>{ profileAddress }</div>
         </div>
-        <div className='ProfileBody'>
+        {/* <div className='ProfileBody'>
           <div className='ProfileSectionTitle'>NFTS ({ hmNftsOwned }):</div>
           <NftList className="NftList" nfts={ ownedNfts } separateByCollection={true} />
-        </div>
+        </div> */}
       </div>
     </div>
   );

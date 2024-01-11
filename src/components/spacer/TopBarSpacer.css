@@ -1,0 +1,5 @@
+.TopBarSpacer {
+    display: flex;
+    height: 78px;
+    width: 100%;
+}

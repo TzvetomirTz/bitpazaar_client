@@ -7,8 +7,6 @@
     display: flex;
     align-items: center;
     background-color: var(--primary-color);
-    /* background-image: linear-gradient(to right, var(--dark-color-1) , var(--dark-color-2)); */
-    /* background-image: linear-gradient(to right, #A1EDED , #3B1775); */
     background-image: linear-gradient(to right, var(--dark-color-1) , var(--dark-color-2));
     height: var(--top-bar-height);
     white-space: nowrap;
@@ -16,6 +14,16 @@
     width: 100%;
     z-index: 1000;
 }
+
+/* .TopBar::after { 
+    content: "";
+    position: absolute;
+    inset: -.625em;
+    background: linear-gradient(to right, var(--dark-color-1) , var(--dark-color-2));
+    filter: blur(2.5em);
+    border-radius: 50%;
+    z-index: -1;
+}  */
 
 .LogoIcon {
     cursor: pointer;
@@ -115,7 +123,7 @@
     color: var(--light-color-1);
     transition: width 0.1s linear;
     margin-left: auto;
-    display: inline-block;
+    display: flex;
     vertical-align: middle;
     border-radius: 100px;
     white-space: nowrap;
@@ -124,16 +132,23 @@
     margin-right: 32px;
 }
 
+.WalletIconWrapper {
+    height: 30px;
+}
+
+.WalletIcon {
+    height: 100%;
+}
+
 .EthBal {
-    display: inline-block;
     -webkit-user-select: none;
     user-select: none;
     height: 30px;
     line-height: 30px;
+    margin-left: 32px;
 }
 
 .WethBal {
-    display: inline-block;
     border-left: none;
     -webkit-user-select: none;
     user-select: none;

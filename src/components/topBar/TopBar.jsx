@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Balance from '../../services/Balance';
 import { useNavigate } from 'react-router-dom';
 import Authentication from '../../services/Authentication';
+import walletIcon from '../../assets/wallet_icon.svg';
 
 function TopBar() {
   const navigate = useNavigate();
@@ -129,6 +130,9 @@ function TopBar() {
       </div>
       {walletConnected &&
           <div className='BalancesWrapper'>
+            <div className='WalletIconWrapper'>
+              <img className='WalletIcon' src={walletIcon}/>
+            </div>
             <div className='EthBal'>ETH: {ethBalance}</div>
             <div className='WethBal'>WETH: {wethBalance}</div>
           </div>

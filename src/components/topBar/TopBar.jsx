@@ -104,6 +104,11 @@ function TopBar() {
       <div className="LogoIcon" onClick={goToHomePage}>
         <Logo />
       </div>
+      <div className='NavButtonsWrapper'>
+        <div className='NavButton'>Collections</div>
+        <div className='NavButton'>Placements</div>
+        <div className='NavButton'>Drops</div>
+      </div>
       <div className='SearchWrapper'>
         <input className='SearchBar' onKeyDown={handleKeyDown} onChange={setSearchBarState}></input>
         {searchResName !== "" && 
@@ -121,17 +126,16 @@ function TopBar() {
             Authenticate To Backend
           </div>
         }
-        {walletConnected &&
-          <div className='Balances'>
+      </div>
+      {walletConnected &&
+          <div className='BalancesWrapper'>
             <div className='EthBal'>ETH: {ethBalance}</div>
-            <div className='TokenSwapIcon'>SWAP</div>
             <div className='WethBal'>WETH: {wethBalance}</div>
           </div>
         }
         {walletConnected &&
           <div className='ProfileIcon' onClick={goToProfilePage}></div>
         }
-      </div>
     </div>
   );
 }

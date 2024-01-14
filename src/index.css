@@ -1,16 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #000;
+  /* background-color: var(--dark-color); */
+  background-image: linear-gradient(to right, var(--dark-color-1) , var(--dark-color-2));
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
 
 * {
-  font-family: 'Inter', sans-serif;
-  font-weight: 800;
+  font-family: 'Poppins', sans-serif;
+  /* font-weight: 600; */
+}
+
+:root { 
+  --dark-color: #070325;
+  --dark-color-1: #2C1C46;
+  --dark-color-2: #1A1944;
+  --primary-color: #F0950D;
+  --light-color-1: #FFFFFF;
+  --light-color-2: #DDDDDD;
 }

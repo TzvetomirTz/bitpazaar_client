@@ -1,19 +1,19 @@
-const { ethers } = require('ethers');
-const AuthClient = require('../clients/AuthClient').default;
+const { ethers } = require('ethers')
+const AuthClient = require('../clients/AuthClient').default
 
 const connectWallet = async (stateConnectWallet) => {
-    const provider = new ethers.BrowserProvider(window.ethereum, "any");
-			let signer = null;
+    const provider = new ethers.BrowserProvider(window.ethereum, "any")
+			let signer = null
 
-			signer = await provider.getSigner();
-			await stateConnectWallet(provider, signer);
+			signer = await provider.getSigner()
+			await stateConnectWallet(provider, signer)
 }
 
 const generateAcsToken = async (provider, signer) => {
     const domain = {
         name: 'BitPazaar',
         chainId: (await provider.getNetwork()).chainId
-    };
+    }
 
     const types = {
         Auth: [
@@ -21,23 +21,23 @@ const generateAcsToken = async (provider, signer) => {
             { name: 'action', type: 'string' },
             { name: 'ogTs', type: 'uint256'}
         ]
-    };
+    }
 
-    const ogTs = new Date().getTime();
-    const action = 'auth';
-    const wltAddr = await signer.getAddress();
+    const ogTs = new Date().getTime()
+    const action = 'auth'
+    const wltAddr = await signer.getAddress()
 
     const authPayload = {
         wltAddr,
         action,
         ogTs
-    };
+    }
 
     try {
-        const signature = await signer.signTypedData(domain, types, authPayload);
-        return await AuthClient.getAcsToken(wltAddr, action, ogTs, signature);
+        const signature = await signer.signTypedData(domain, types, authPayload)
+        return await AuthClient.getAcsToken(wltAddr, action, ogTs, signature)
     } catch (exception) {
-        return "";
+        return ""
     }
 }
 
@@ -46,4 +46,4 @@ const Authentication = {
     generateAcsToken
 }
 
-export default Authentication;
+export default Authentication

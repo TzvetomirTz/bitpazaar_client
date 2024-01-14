@@ -22,3 +22,10 @@ body {
   --light-color-1: #FFFFFF;
   --light-color-2: #DDDDDD;
 }
+
+/* Utils */
+
+.NoSelect {
+  -webkit-user-select: none;
+  user-select: none;
+}

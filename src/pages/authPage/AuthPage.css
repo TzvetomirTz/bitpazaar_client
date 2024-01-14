@@ -1,0 +1,83 @@
+:root {
+    --left-auth-bar-width: 480px;
+}
+
+.AuthPage {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.AuthPageLeftSection {
+    height: 100%;
+    width: 480px;
+    overflow: hidden;
+    display: flex;
+}
+
+.AuthPic {
+    object-fit: cover;
+}
+
+.AuthPageRightSection{
+    display: flex;
+    height: 100%;
+    flex: 1;
+}
+
+.AuthPageRightSectionWrapper {
+    margin-top: 256px;
+    margin-left: 128px;
+}
+
+.WelcomeTitle {
+    color: var(--light-color-1);
+    font-weight: 900;
+    font-size: 64px;
+}
+
+.WelcomeSlogan {
+    color: var(--light-color-1);
+    margin-top: -20px;
+}
+
+.ConnectNowText {
+    margin-top: 20px;
+    color: var(--light-color-1);
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.ConnectButton {
+    background-color: var(--dark-color);
+    border-radius: 12px;
+    display: flex;
+    padding: 16px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    align-items: center;
+}
+
+.ConnectButton:hover {
+    background-color: transparent;
+    border: 1px solid var(--light-color-1);
+}
+
+.WalletIcon {
+    margin-left: 16px;
+    width: 32px;
+}
+
+.ConnectButtonText {
+    color: var(--light-color-1);
+    flex: 1;
+    margin-left: 32px;
+}
+
+.AuthFooterText {
+    margin-top: 32px;
+    font-size: 12px;
+    color: var(--light-color-1);
+}

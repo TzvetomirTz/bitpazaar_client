@@ -18,6 +18,7 @@ function TopBar() {
   const stateConnectWallet = authState((state) => state.connectWallet);
   const authenticateToBackend = authState((state) => state.authenticateToBackend);
   const authenticatedToBackend = authState((state) => state.authenticatedToBackend);
+  const disconnectWallet = authState((state) => state.disconnectWallet);
   const signer = authState((state) => state.signer);
   const provider = authState((state) => state.provider);
   const walletConnected = authState((state) => state.walletConnected);
@@ -28,6 +29,7 @@ function TopBar() {
     (async () => {
       if(walletConnected) {
         updateBalance();
+        authToBackend();
       }
     })()
   }, [walletConnected]);
@@ -47,18 +49,20 @@ function TopBar() {
   }, [searchBarState, signer]);
 
   const triggerConnectWallet = async () => {
-		if(typeof window.ethereum != 'undefined') {
-      try {
-        await Authentication.connectWallet(stateConnectWallet);
+    goToAuthPage()
 
-        setEthBalance(Number(await Balance.getEthBalance(provider, signer)).toFixed(4));
-        setWethBalance(Number(await Balance.getWethBalance(provider, signer)).toFixed(4));
-      } catch(err) {
-        toast.error("Can't connect wallet. Is there an authentication in your wallet provider waiting to be approved already?");
-      }
-		} else {
-      toast.error("Please install Metamask");
-    }
+		// if(typeof window.ethereum != 'undefined') {
+    //   try {
+    //     await Authentication.connectWallet(stateConnectWallet);
+
+    //     setEthBalance(Number(await Balance.getEthBalance(provider, signer)).toFixed(4));
+    //     setWethBalance(Number(await Balance.getWethBalance(provider, signer)).toFixed(4));
+    //   } catch(err) {
+    //     toast.error("Can't connect wallet. Is there an authentication in your wallet provider waiting to be approved already?");
+    //   }
+		// } else {
+    //   toast.error("Please install Metamask");
+    // }
 	}
 
   const updateBalance = async () => {
@@ -94,10 +98,24 @@ function TopBar() {
     }, [navigate, signer]
   );
 
+  const goToAuthPage = useCallback(
+    async () => {
+      const redirPath = '/auth';
+
+      if(redirPath !== window.location.pathname) {
+        navigate(redirPath, {replace: false});
+      }
+    }, [navigate]
+  )
+
   const authToBackend = async () => {
-    const accToken = await Authentication.generateAcsToken(provider, signer);
-    console.log(accToken); // ToDo: delete this at some point lol
-    authenticateToBackend(accToken);
+    const accToken = await Authentication.generateAcsToken(provider, signer)
+
+    if(accToken !== "") {
+      authenticateToBackend(accToken)
+    } else {
+      disconnectWallet()
+    }
   };
 
   return (
@@ -121,11 +139,6 @@ function TopBar() {
       <div className='AuthWrapper'>
         {!walletConnected &&
           <div className='ConnectWalletBtn' onClick={triggerConnectWallet}>Connect</div>
-        }
-        {walletConnected && !authenticatedToBackend &&
-          <div className='authToBackendBtn' onClick={authToBackend}>
-            Authenticate To Backend
-          </div>
         }
       </div>
       {walletConnected &&

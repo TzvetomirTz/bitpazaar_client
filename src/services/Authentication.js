@@ -33,8 +33,12 @@ const generateAcsToken = async (provider, signer) => {
         ogTs
     };
 
-    const signature = await signer.signTypedData(domain, types, authPayload);
-    return await AuthClient.getAcsToken(wltAddr, action, ogTs, signature);
+    try {
+        const signature = await signer.signTypedData(domain, types, authPayload);
+        return await AuthClient.getAcsToken(wltAddr, action, ogTs, signature);
+    } catch (exception) {
+        return "";
+    }
 }
 
 const Authentication = {

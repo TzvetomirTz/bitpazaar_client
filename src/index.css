@@ -4,7 +4,6 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* background-color: var(--dark-color); */
   background-image: linear-gradient(to right, var(--dark-color-1) , var(--dark-color-2));
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -13,7 +12,6 @@ body {
 
 * {
   font-family: 'Poppins', sans-serif;
-  /* font-weight: 600; */
 }
 
 :root { 

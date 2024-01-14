@@ -20,5 +20,5 @@ export const authState = create((set) => ({
 		const newState = {accessKey: newAccessKey, authenticatedToBackend: true};
 		set(newState);
 		return newState;
-	},
+	}
 }));

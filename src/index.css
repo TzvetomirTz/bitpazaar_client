@@ -21,6 +21,7 @@ body {
   --primary-color: #F0950D;
   --light-color-1: #FFFFFF;
   --light-color-2: #DDDDDD;
+  --border-radius-s: 0.7rem;
 }
 
 /* Utils */

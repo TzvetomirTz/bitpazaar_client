@@ -1,5 +1,5 @@
 :root {
-    --top-bar-height: 78px;
+    --top-bar-height: 5rem;
 }
 
 .TopBar {
@@ -15,24 +15,14 @@
     z-index: 1000;
 }
 
-/* .TopBar::after { 
-    content: "";
-    position: absolute;
-    inset: -.625em;
-    background: linear-gradient(to right, var(--dark-color-1) , var(--dark-color-2));
-    filter: blur(2.5em);
-    border-radius: 50%;
-    z-index: -1;
-}  */
-
 .LogoIcon {
     cursor: pointer;
-    margin: 0px 32px;
+    margin: 0px 2rem;
 }
 
 .NavButtonsWrapper {
     display: flex;
-    margin: 0px 32px;
+    margin: 0px 2rem;
     height: var(--top-bar-height);
 }
 
@@ -40,7 +30,7 @@
     color: var(--light-color-1);
     height: var(--top-bar-height);
     line-height: var(--top-bar-height);
-    margin-right: 32px;
+    margin-right: 2rem;
 }
 
 .NavButton:hover {
@@ -51,16 +41,15 @@
 .SearchWrapper {
     align-items: center;
     justify-content: center;
-    margin-left: 32px;
+    margin-left: 2rem;
 }
 
 .SearchBar {
-    font-size: 16px;
-    padding: 2px 16px;
-    border-radius: 12px;
+    padding: 0.17rem 1rem;
+    height: 2rem;
+    width: 40rem;
+    border-radius: var(--border-radius-s);
     transition: 0.1s linear;
-    width: 640px;
-    height: 30px;
     display: inline-block;
     vertical-align: middle;
     text-overflow: ellipsis;
@@ -79,11 +68,11 @@
 
 .SearchResWrapper {
     display: none;
-    border-radius: 4px;
-    margin-top: 16px;
-    padding: 16px;
-    width: 640px;
-    height: 256px;
+    border-radius: var(--border-radius-s);
+    margin-top: 1rem;
+    padding: 1rem;
+    width: 40rem;
+    height: 16rem;
     position: absolute;
     background: none;
     overflow-y: scroll;
@@ -99,25 +88,28 @@
 }
 
 .ConnectWalletBtn {
-    padding: 4px 8px;
-    border: 1px solid var(--light-color-1);
-    border-radius: 12px;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid transparent;
+    border-radius: var(--border-radius-s);
     color: var(--light-color-1);
+    background-color: var(--dark-color);
     cursor: pointer;
     margin-left: auto;
-    margin-right: 16px;
+    margin-right: 1rem;
     display: inline-block;
     -webkit-user-select: none;
     user-select: none;
 }
 
 .ConnectWalletBtn:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background-color: none;
+    border: 1px solid var(--light-color-1);
 }
 
 .BalancesWrapper {
     cursor: pointer;
-    padding: 2px 16px;
+    padding: 0.17rem 1rem;
+    height: 2rem;
     text-overflow: ellipsis;
     overflow: hidden;
     color: var(--light-color-1);
@@ -125,15 +117,14 @@
     margin-left: auto;
     display: flex;
     vertical-align: middle;
-    border-radius: 100px;
     white-space: nowrap;
-    border-radius: 12px;
+    border-radius: var(--border-radius-s);
     background-color: var(--dark-color);
-    margin-right: 32px;
+    margin-right: 2rem;
 }
 
 .WalletIconWrapper {
-    height: 30px;
+    height: 2rem;
 }
 
 .WalletIcon {
@@ -143,18 +134,18 @@
 .EthBal {
     -webkit-user-select: none;
     user-select: none;
-    height: 30px;
-    line-height: 30px;
-    margin-left: 32px;
+    height: 2rem;
+    line-height: 2rem;
+    margin-left: 2rem;
 }
 
 .WethBal {
     border-left: none;
     -webkit-user-select: none;
     user-select: none;
-    height: 30px;
-    line-height: 30px;
-    margin-left: 32px;
+    height: 2rem;
+    line-height: 2rem;
+    margin-left: 2rem;
 }
 
 .EthBal:hover, .WethBal:hover {
@@ -164,35 +155,15 @@
 .ProfileIcon {
     display: inline-block;
     vertical-align: middle;
-    height: 50px;
-    width: 50px;
-    border-radius: 100px;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
     cursor: pointer;
     transition-duration: 0.1s;
-    margin: 0px 32px;
+    margin: 0rem 2rem;
     background-color: var(--dark-color);
 }
 
 .ProfileIcon:hover {
-    background: rgba(255,255,255,0.1);
-}
-
-.authToBackendBtn {
-    color: var(--light-color-1);
-    margin-left: auto;
-    display: inline-block;
-    vertical-align: middle;
-    padding: 2px 16px;
-    height: 30px;
-    line-height: 30px;
-    border: 2px solid var(--light-color-1);
-    border-radius: 12px;
-    -webkit-user-select: none;
-    user-select: none;
-    transition-duration: 0.1s;
-}
-
-.authToBackendBtn:hover {
-    cursor: pointer;
     background: rgba(255,255,255,0.1);
 }

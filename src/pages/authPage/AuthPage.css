@@ -52,10 +52,10 @@
 
 .ConnectButton {
     background-color: var(--dark-color);
-    border-radius: 0.7rem;
+    border-radius: var(--border-radius-s);
+    border: 1px solid transparent;
     display: flex;
     padding: 1rem;
-    border: 1px solid transparent;
     cursor: pointer;
     align-items: center;
 }

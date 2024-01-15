@@ -1,5 +1,5 @@
 :root {
-    --left-auth-bar-width: 480px;
+    --left-auth-bar-width: 30rem;
 }
 
 .AuthPage {
@@ -12,7 +12,7 @@
 
 .AuthPageLeftSection {
     height: 100%;
-    width: 480px;
+    width: var(--left-auth-bar-width);
     overflow: hidden;
     display: flex;
 }
@@ -21,40 +21,40 @@
     object-fit: cover;
 }
 
-.AuthPageRightSection{
+.AuthPageRightSection {
     display: flex;
     height: 100%;
     flex: 1;
 }
 
 .AuthPageRightSectionWrapper {
-    margin-top: 256px;
-    margin-left: 128px;
+    margin-top: 16rem;
+    margin-left: 10rem;
 }
 
 .WelcomeTitle {
     color: var(--light-color-1);
     font-weight: 900;
-    font-size: 64px;
+    font-size: 4rem;
 }
 
 .WelcomeSlogan {
     color: var(--light-color-1);
-    margin-top: -20px;
+    margin-top: -1.25rem;
 }
 
 .ConnectNowText {
-    margin-top: 20px;
+    margin-top: 1rem;
     color: var(--light-color-1);
-    font-size: 24px;
-    margin-bottom: 16px;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .ConnectButton {
     background-color: var(--dark-color);
-    border-radius: 12px;
+    border-radius: 0.7rem;
     display: flex;
-    padding: 16px;
+    padding: 1rem;
     border: 1px solid transparent;
     cursor: pointer;
     align-items: center;
@@ -66,27 +66,27 @@
 }
 
 .WalletIcon {
-    margin-left: 16px;
-    width: 32px;
+    margin-left: 1rem;
+    width: 2rem;
 }
 
 .LoadingAnimation {
     padding: none;
     margin: none;
     transform: scale(2);
-    width: 32px;
-    height: 32px;
+    width: 2rem;
+    height: 2rem;
     overflow: hidden;
 }
 
 .ConnectButtonText {
     color: var(--light-color-1);
     flex: 1;
-    margin-left: 32px;
+    margin-left: 2rem;
 }
 
 .AuthFooterText {
-    margin-top: 32px;
-    font-size: 12px;
+    margin-top: 2rem;
+    font-size: 0.75rem;
     color: var(--light-color-1);
 }

@@ -90,9 +90,9 @@ function TopBar() {
         <Logo />
       </div>
       <div className='NavButtonsWrapper'>
-        <div className='NavButton'>Collections</div>
-        <div className='NavButton'>Placements</div>
-        <div className='NavButton'>Drops</div>
+        <div className='NavButton NoSelect'>Collections</div>
+        <div className='NavButton NoSelect'>Placements</div>
+        <div className='NavButton NoSelect'>Drops</div>
       </div>
       <div className='SearchWrapper'>
         <input className='SearchBar' onKeyDown={handleKeyDown} onChange={setSearchBarState}></input>
@@ -110,7 +110,7 @@ function TopBar() {
       {walletConnected &&
           <div className='BalancesWrapper'>
             <div className='WalletIconWrapper'>
-              <img className='WalletIcon' src={walletIcon}/>
+              <img className='WalletIcon NoSelect' src={walletIcon}/>
             </div>
             <div className='EthBal'>ETH: {ethBalance}</div>
             <div className='WethBal'>WETH: {wethBalance}</div>

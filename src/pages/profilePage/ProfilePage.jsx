@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom'
 import ProfileClient from '../../clients/ProfileClient'
 import { authState } from '../../state/AuthState'
 import NftList from '../../components/nftList/NftList'
+import defaultPortrait from '../../assets/default_portrait.jpg'
+import Clipboard from '../../services/Clipboard'
 
 function ProfilePage() {
   const { profileAddress } = useParams()
@@ -34,13 +36,23 @@ function ProfilePage() {
       <TopBarSpacer />
       <div className="ProfileContainer">
         <div className='ProfileHeader'>
-          <div className='ProfilePic'></div>
-          <div className='ProfileAddress'>{ profileAddress }</div>
+          <div className='ProfilePicWrapper'>
+            <img className='ProfilePic NoSelect' src={ defaultPortrait } />
+          </div>
+          <div className='ProfileDetailsWrapper'>
+            <div className='NicknameWrapper'>
+              <div className='Nickname'>DEFAULT_DADDY</div>
+            </div>
+            <div className='ProfileAddressWrapper NoSelect' onClick={() => {Clipboard.copyToClipboard(profileAddress)}}>Address: { profileAddress }</div>
+            <div className='SocialsWrapper'>
+              <a href={"https://etherscan.io/address/" + profileAddress} target="_blank">Etherscan</a>
+            </div>
+          </div>
         </div>
-        <div className='ProfileBody'>
+        {/* <div className='ProfileBody'>
           <div className='ProfileSectionTitle'>NFTS ({ hmNftsOwned }):</div>
           <NftList className="NftList" nfts={ ownedNfts } separateByCollection={true} />
-        </div>
+        </div> */}
       </div>
     </div>
   )

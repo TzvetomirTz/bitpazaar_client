@@ -1,5 +1,5 @@
 .TopBarSpacer {
     display: flex;
-    height: 78px;
+    height: var(--top-bar-height);
     width: 100%;
 }

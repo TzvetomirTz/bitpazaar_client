@@ -1,12 +1,7 @@
-:root {
-    --top-bar-height: 5rem;
-}
-
 .TopBar {
     font-family: 'Montserrat', sans-serif;
     display: flex;
     align-items: center;
-    background-color: var(--primary-color);
     background-image: linear-gradient(to right, var(--dark-color-1) , var(--dark-color-2));
     height: var(--top-bar-height);
     white-space: nowrap;

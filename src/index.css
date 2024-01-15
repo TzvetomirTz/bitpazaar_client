@@ -21,7 +21,9 @@ body {
   --primary-color: #F0950D;
   --light-color-1: #FFFFFF;
   --light-color-2: #DDDDDD;
+  --top-bar-height: 5rem;
   --border-radius-s: 0.7rem;
+  --border-radius-m: 2rem;
 }
 
 /* Utils */

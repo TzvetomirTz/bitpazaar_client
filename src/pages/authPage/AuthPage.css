@@ -70,6 +70,15 @@
     width: 32px;
 }
 
+.LoadingAnimation {
+    padding: none;
+    margin: none;
+    transform: scale(2);
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+}
+
 .ConnectButtonText {
     color: var(--light-color-1);
     flex: 1;

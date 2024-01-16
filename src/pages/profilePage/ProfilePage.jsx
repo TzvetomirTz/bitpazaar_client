@@ -8,6 +8,7 @@ import { authState } from '../../state/AuthState'
 import NftList from '../../components/nftList/NftList'
 import defaultPortrait from '../../assets/default_portrait.jpg'
 import Clipboard from '../../services/Clipboard'
+import etherscranIcon from '../../assets/etherscan_logo.svg'
 
 function ProfilePage() {
   const { profileAddress } = useParams()
@@ -45,7 +46,9 @@ function ProfilePage() {
             </div>
             <div className='ProfileAddressWrapper NoSelect' onClick={() => {Clipboard.copyToClipboard(profileAddress)}}>Address: { profileAddress }</div>
             <div className='SocialsWrapper'>
-              <a href={"https://etherscan.io/address/" + profileAddress} target="_blank">Etherscan</a>
+              <a href={"https://etherscan.io/address/" + profileAddress} target="_blank">
+                <img className='SocialNetworkIcon' src={etherscranIcon} />
+              </a>
             </div>
           </div>
         </div>

@@ -52,3 +52,11 @@
     cursor: pointer;
     border: 1px solid var(--light-color-1);
 }
+
+.SocialsWrapper {
+    margin-top: 2rem;
+}
+
+.SocialNetworkIcon {
+    height: 2rem;
+}

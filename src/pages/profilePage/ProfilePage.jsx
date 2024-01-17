@@ -9,6 +9,7 @@ import NftList from '../../components/nftList/NftList'
 import defaultPortrait from '../../assets/default_portrait.jpg'
 import Clipboard from '../../services/Clipboard'
 import etherscranIcon from '../../assets/etherscan_logo.svg'
+import plusIcon from '../../assets/plus_icon.svg'
 
 function ProfilePage() {
   const { profileAddress } = useParams()
@@ -16,6 +17,7 @@ function ProfilePage() {
   const accessKey = authState((state) => state.accessKey)
   const [hmNftsOwned, setHmNftsOwned] = useState(0)
   const [ownedNfts, setOwnedNfts] = useState([])
+  const signer = authState((state) => state.signer)
 
   React.useEffect(() => {
     (async () => {
@@ -46,9 +48,13 @@ function ProfilePage() {
             </div>
             <div className='ProfileAddressWrapper NoSelect' onClick={() => {Clipboard.copyToClipboard(profileAddress)}}>Address: { profileAddress }</div>
             <div className='SocialsWrapper'>
-              <a href={"https://etherscan.io/address/" + profileAddress} target="_blank">
+              <a className='SocialNetworkIconWrapper' href={"https://etherscan.io/address/" + profileAddress} target="_blank">
                 <img className='SocialNetworkIcon' src={etherscranIcon} />
               </a>
+              {signer !== null && profileAddress === signer.address && <div className='SocialsChangeButton'>
+                <img className='CogIcon' src={plusIcon} />
+              </div>
+              }
             </div>
           </div>
         </div>

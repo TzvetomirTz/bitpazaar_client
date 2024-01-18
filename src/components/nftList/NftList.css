@@ -1,42 +1,16 @@
 .NftList {
-    display: flex;
-    color: #fff;
-    padding: 20px;
-    flex-direction: column;
+    border: 1px solid var(--light-color-1);
+    display: inline-flex;
+    width: 100%;
     flex-wrap: wrap;
     justify-content: center;
+    padding-top: 2rem;
 }
 
-.CollectionWrapper {
-    display: flex;
-    flex-direction: column;
-}
-
-.CollectionTitle {
-    display: flexbox;
-}
-
-.CollectionNftsWrapper {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.NtfWrapper {
-    display: flexbox;
-    border: 1px solid #fff;
-    width: 170px;
-    margin: 10px;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 10px;
-    height: 250px;
-}
-
-.NftThumbnail {
-    height: 150px;
-    width: 150px;
-    margin: 10px;
-    border: 1px solid #fff;
-    display: flexbox;
+.NftCard {
+    width: 18rem;
+    height: 24rem;
+    background-color: var(--dark-color);
+    margin: 1rem;
+    border-radius: var(--border-radius-s);
 }

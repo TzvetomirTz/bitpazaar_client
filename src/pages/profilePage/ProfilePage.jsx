@@ -10,6 +10,7 @@ import defaultPortrait from '../../assets/default_portrait.jpg'
 import Clipboard from '../../services/Clipboard'
 import etherscranIcon from '../../assets/etherscan_logo.svg'
 import plusIcon from '../../assets/plus_icon.svg'
+import loadingAnimation from '../../assets/animations/loading_animation.gif'
 
 function ProfilePage() {
   const { profileAddress } = useParams()
@@ -18,6 +19,7 @@ function ProfilePage() {
   const [hmNftsOwned, setHmNftsOwned] = useState(0)
   const [ownedNfts, setOwnedNfts] = useState([])
   const signer = authState((state) => state.signer)
+  const [nftListIsLoading, setNftListIsLoading] = useState(false);
 
   React.useEffect(() => {
     (async () => {
@@ -28,9 +30,13 @@ function ProfilePage() {
   }, [])
 
   const loadProfileNfts = async () => {
+    setNftListIsLoading(true)
+
     const nftData = await ProfileClient.getNftsByOwner(accessKey, "0x300e31AAF34aB0327Eaf6624C543Dbe19f44bbd3") // ToDo: replace addr
     setHmNftsOwned(nftData.nftsCount)
     setOwnedNfts(nftData.nfts)
+
+    setNftListIsLoading(false)
   }
 
   return (
@@ -40,7 +46,7 @@ function ProfilePage() {
       <div className="ProfileContainer">
         <div className='ProfileHeader'>
           <div className='ProfilePicWrapper'>
-            <img className='ProfilePic NoSelect' src={ defaultPortrait } />
+            <img className='ProfilePic NoSelect' src={ defaultPortrait } alt='' />
           </div>
           <div className='ProfileDetailsWrapper'>
             <div className='NicknameWrapper'>
@@ -49,17 +55,17 @@ function ProfilePage() {
             <div className='ProfileAddressWrapper NoSelect' onClick={() => {Clipboard.copyToClipboard(profileAddress)}}>Address: { profileAddress }</div>
             <div className='SocialsWrapper'>
               <a className='SocialNetworkIconWrapper' href={"https://etherscan.io/address/" + profileAddress} target="_blank">
-                <img className='SocialNetworkIcon' src={etherscranIcon} />
+                <img className='SocialNetworkIcon' src={etherscranIcon} alt='' />
               </a>
               {signer !== null && profileAddress === signer.address && <div className='SocialsChangeButton'>
-                <img className='CogIcon' src={plusIcon} />
+                <img className='CogIcon' src={plusIcon} alt='' />
               </div>
               }
             </div>
           </div>
         </div>
         <div className='ProfileBody'>
-          {/* <div className='ProfileSectionTitle'>NFTS ({ hmNftsOwned }):</div> */}
+          {nftListIsLoading && <img className='NftLoadingAnimation' src={loadingAnimation} alt='' />}
           <NftList className="NftList" nfts={ ownedNfts } separateByCollection={true} />
         </div>
       </div>

@@ -21,8 +21,8 @@ function NftList(props) {
                     { collectionName }
                 </div>
                 <div className='NftCardPriceWrapper'>
-                    <div className='NftCardPriceText'>FL</div>
-                    <img className='NftCardEtherIcon' src={etherIcon} />
+                    <div className='NftCardPriceText'>FLR</div>
+                    <img className='NftCardEtherIcon' src={ etherIcon } alt='' />
                     <div className='NftCardPrice'>{ n.contract.openSeaMetadata.floorPrice }</div>
                 </div>
             </div>

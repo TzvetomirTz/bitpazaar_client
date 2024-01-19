@@ -4,6 +4,7 @@
     flex-wrap: wrap;
     justify-content: center;
     padding-top: 2rem;
+    padding-bottom: 2rem;
 }
 
 .NftCard {
@@ -15,8 +16,9 @@
     transition: 0.05s linear;
     overflow: hidden;
     cursor: pointer;
-    display: flexbox;
-    box-shadow: 0rem 0rem 0rem 0rem var(--dark-color);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0rem 0rem 0rem 0rem var(--dark-color); /* Makes the hover shadow appear smoothly */
 }
 
 .NftCard:hover {
@@ -33,22 +35,29 @@
     width: 18rem;
     height: 18rem;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .MediaSquare {
     width: 100%;
-    height: 100%;
     transition: 0.1s linear;
 }
 
 .NftCardDetails {
     padding: 1rem;
-    display: flexbox;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .NftCardName {
     color: var(--light-color-1);
     font-size: 1.2rem;
+    white-space: nowrap;
+    text-overflow: ellipsis; 
+    overflow: hidden;
 }
 
 .NftCardCollectionName {
@@ -56,7 +65,26 @@
     font-size: 0.8rem;
 }
 
-.NftCardTokenId {
+.NftCardPriceWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-top: auto;
+}
+
+.NftCardPriceText {
     color: var(--light-color-1);
-    font-weight: 800;
+}
+
+.NftCardEtherIcon {
+    width: 1.5rem;
+}
+
+.NftCardPrice {
+    color: var(--light-color-1);
+    font-weight: 600;
+    max-width: 4rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

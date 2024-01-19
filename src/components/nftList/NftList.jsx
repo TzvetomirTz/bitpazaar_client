@@ -1,5 +1,6 @@
 import './NftList.css'
 import MediaSquare from '../MediaSquare/MediaSquare'
+import etherIcon from '../../assets/eth_icon.svg'
 
 function NftList(props) {
     const { nfts } = props
@@ -18,6 +19,11 @@ function NftList(props) {
                 <div className='NftCardName'>{ nftName }</div>
                 <div className='NftCardCollectionName'>
                     { collectionName }
+                </div>
+                <div className='NftCardPriceWrapper'>
+                    <div className='NftCardPriceText'>FL</div>
+                    <img className='NftCardEtherIcon' src={etherIcon} />
+                    <div className='NftCardPrice'>{ n.contract.openSeaMetadata.floorPrice }</div>
                 </div>
             </div>
         </div>})

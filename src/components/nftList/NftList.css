@@ -1,5 +1,4 @@
 .NftList {
-    border: 1px solid var(--light-color-1);
     display: inline-flex;
     width: 100%;
     flex-wrap: wrap;
@@ -9,8 +8,55 @@
 
 .NftCard {
     width: 18rem;
-    height: 24rem;
+    height: 26rem;
     background-color: var(--dark-color);
     margin: 1rem;
     border-radius: var(--border-radius-s);
+    transition: 0.05s linear;
+    overflow: hidden;
+    cursor: pointer;
+    display: flexbox;
+    box-shadow: 0rem 0rem 0rem 0rem var(--dark-color);
+}
+
+.NftCard:hover {
+    scale: 1.1;
+    box-shadow: 0rem 0rem 2rem 0.1rem var(--dark-color);
+}
+
+.NftCard:hover .NftCardVisualWrapper{
+    scale: 1.1;
+}
+
+.NftCardVisualWrapper {
+    background-color: black;
+    width: 18rem;
+    height: 18rem;
+    overflow: hidden;
+}
+
+.MediaSquare {
+    width: 100%;
+    height: 100%;
+    transition: 0.1s linear;
+}
+
+.NftCardDetails {
+    padding: 1rem;
+    display: flexbox;
+}
+
+.NftCardName {
+    color: var(--light-color-1);
+    font-size: 1.2rem;
+}
+
+.NftCardCollectionName {
+    color: var(--light-color-1);
+    font-size: 0.8rem;
+}
+
+.NftCardTokenId {
+    color: var(--light-color-1);
+    font-weight: 800;
 }

@@ -1,0 +1,42 @@
+.Dropdown-control {
+    background-color: var(--dark-color);
+    border: none;
+    border-radius: var(--border-radius-s);
+    width: 24rem;
+    cursor: pointer;
+    color: var(--light-color-1);
+    white-space: nowrap;
+    text-overflow: ellipsis; 
+    overflow: hidden;
+    display: flex;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.Dropdown-arrow {
+    /* margin-top: 0.2rem;
+    margin-right: 1rem; */
+    display: none;
+}
+
+.Dropdown-menu {
+    background-color: var(--dark-color);
+    border-radius: var(--border-radius-s);
+    border: none;
+    margin-top: 0.2rem;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.Dropdown-menu::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.Dropdown-option {
+    color: var(--light-color-1);
+}
+
+.Dropdown-option.is-selected, .Dropdown-option:hover {
+    background-color: var(--dark-color);
+    color: var(--light-color-1);
+}

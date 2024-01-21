@@ -23,7 +23,6 @@ function NftList(props) {
 
     useEffect(() => { // Apply search filters
 		(async () => {
-            const searchText = searchBarState.target.value.toLowerCase()
             let newNftsToRender = []
 
 			if(collectionFilter.value === collectionsEmptyFilter || typeof collectionFilter.value === "undefined") {
@@ -37,11 +36,11 @@ function NftList(props) {
             }
 
             newNftsToRender = newNftsToRender.filter(n => {
-                return (!(searchText) ||
-                            (n.contract.openSeaMetadata.collectionName + "").toLowerCase().includes(searchText) ||
-                            (n.contract.name + "").toLowerCase().includes(searchText) || 
-                            (n.name + "").toLowerCase().includes(searchText) || 
-                            (n.tokenId + "").toLowerCase().includes(searchText))
+                return (!(searchBarState) ||
+                            (n.contract.openSeaMetadata.collectionName + "").toLowerCase().includes(searchBarState) ||
+                            (n.contract.name + "").toLowerCase().includes(searchBarState) || 
+                            (n.name + "").toLowerCase().includes(searchBarState) || 
+                            (n.tokenId + "").toLowerCase().includes(searchBarState))
             })
 
             setNftsToRender(newNftsToRender)
@@ -85,7 +84,7 @@ function NftList(props) {
         <div className='NftList'>
             <div className='NftListSearchWrapper'>
                 <Dropdown options={ ownedNftsCollections } onChange={ setCollectionFilter } value={ collectionsEmptyFilter } placeholder={ collectionsEmptyFilter } />
-                <input className='NftListSearchBar' onChange={ setSearchBarState }></input>
+                <input className='NftListSearchBar' onChange={ (s) => { setSearchBarState(s.target.value.toLowerCase()) } }></input>
             </div>
             <div className='NftListCardsWrapper'>{ renderNfts() }</div>
         </div>

@@ -9,6 +9,7 @@ import NftList from '../../components/nftList/NftList'
 import defaultPortrait from '../../assets/default_portrait.jpg'
 import Clipboard from '../../services/Clipboard'
 import etherscranIcon from '../../assets/etherscan_logo.svg'
+import copyIcon from '../../assets/copy_icon.svg'
 import plusIcon from '../../assets/plus_icon.svg'
 import loadingAnimation from '../../assets/animations/loading_animation.gif'
 
@@ -52,7 +53,10 @@ function ProfilePage() {
             <div className='NicknameWrapper'>
               <div className='Nickname'>DEFAULT_DADDY</div>
             </div>
-            <div className='ProfileAddressWrapper NoSelect' onClick={() => {Clipboard.copyToClipboard(profileAddress)}}>Address: { profileAddress }</div>
+            <div className='ProfileAddressWrapper NoSelect' onClick={() => {Clipboard.copyToClipboard(profileAddress)}}>
+              Address: { profileAddress }
+              <img className='CopyIcon' src={copyIcon} alt='' />
+            </div>
             <div className='SocialsWrapper'>
               <a className='SocialNetworkIconWrapper' href={"https://etherscan.io/address/" + profileAddress} target="_blank">
                 <img className='SocialNetworkIcon' src={etherscranIcon} alt='' />

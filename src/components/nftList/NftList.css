@@ -4,11 +4,10 @@
 }
 
 .NftListSearchWrapper {
-    margin-top: 6rem;
+    margin-top: 4rem;
     width: 100%;
     padding: 2rem 0rem;
     display: flex;
-    background-color: burlywood;
 }
 
 .Dropdown-root {

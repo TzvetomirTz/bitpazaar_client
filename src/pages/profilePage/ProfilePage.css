@@ -45,12 +45,18 @@
     background-color: var(--dark-color);
     border-radius: var(--border-radius-s);
     border: 1px solid transparent;
+    display: flex;
 }
 
 .ProfileAddressWrapper:hover {
     background-color: transparent;
     cursor: pointer;
     border: 1px solid var(--light-color-1);
+}
+
+.CopyIcon {
+    width: 1rem;
+    margin-left: 1rem;
 }
 
 .SocialsWrapper {

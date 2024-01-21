@@ -69,8 +69,8 @@ function ProfilePage() {
           </div>
         </div>
         <div className='ProfileBody'>
-          {nftListIsLoading && <img className='NftLoadingAnimation' src={loadingAnimation} alt='' />}
           <NftList className="NftList" nfts={ ownedNfts } separateByCollection={true} />
+          {nftListIsLoading && <img className='NftLoadingAnimation' src={loadingAnimation} alt='' />}
         </div>
       </div>
     </div>

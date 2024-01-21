@@ -5,6 +5,7 @@ import reportWebVitals from './reportWebVitals'
 import HomePage from './pages/homePage/HomePage.jsx'
 import ProfilePage from './pages/profilePage/ProfilePage'
 import AuthPage from './pages/authPage/AuthPage.jsx'
+import NftPage from './pages/nftPage/NftPage.jsx'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
@@ -15,6 +16,7 @@ root.render(
         <Route path="/" element={ <HomePage /> } />
           <Route path="/profile/:profileAddress" element={ <ProfilePage /> } />
           <Route path='/auth' element={ <AuthPage /> } />
+          <Route path='/collections/:collection/nft/:nft' element={ <NftPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

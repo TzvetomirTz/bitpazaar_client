@@ -1,14 +1,16 @@
 import './NftList.css'
 import MediaSquare from '../MediaSquare/MediaSquare'
 import etherIcon from '../../assets/eth_icon.svg'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css';
 import './NftListDropdown.css'
+import { useNavigate } from 'react-router-dom';
 
 function NftList(props) {
     const { nfts } = props
     const collectionsEmptyFilter = "All Collections"
+    const navigate = useNavigate();
 
     const [nftsToRender, setNftsToRender] = useState(nfts)
     const [searchBarState, setSearchBarState] = useState("")
@@ -52,6 +54,10 @@ function NftList(props) {
         nft.contract.openSeaMetadata.collectionName : nft.contract.name
     }
 
+    const determineNftPageUrl = (nft) => {
+            return '/collections/' + nft.contract.address + '/nft/' + nft.tokenId
+        }
+
     const renderNfts = () => {
         return nftsToRender.map((n) => {
             const collectionName = determineNftCollectionName(n)
@@ -62,30 +68,31 @@ function NftList(props) {
             }
 
             // Render starts here
-            return <div className='NftCard'>
-            <div className='NftCardVisualWrapper'>
-                <MediaSquare nft={n}/>
-            </div>
-            <div className='NftCardDetails'>
-                <div className='NftCardName'>{ nftName }</div>
-                <div className='NftCardCollectionName'>
-                    { collectionName }
+            return <a className='NftCard' href={determineNftPageUrl(n)}>
+                <div className='NftCardVisualWrapper'>
+                    <MediaSquare nft={n}/>
                 </div>
-                <div className='NftCardPriceWrapper'>
-                    <div className='NftCardPriceText'>Floor</div>
-                    <img className='NftCardEtherIcon' src={ etherIcon } alt='' />
-                    <div className='NftCardPrice'>{ n.contract.openSeaMetadata.floorPrice }</div>
+                <div className='NftCardDetails'>
+                    <div className='NftCardName'>{ nftName }</div>
+                    <div className='NftCardCollectionName'>
+                        { collectionName }
+                    </div>
+                    <div className='NftCardPriceWrapper'>
+                        <div className='NftCardPriceText'>Floor</div>
+                        <img className='NftCardEtherIcon' src={ etherIcon } alt='' />
+                        <div className='NftCardPrice'>{ n.contract.openSeaMetadata.floorPrice }</div>
+                    </div>
                 </div>
-            </div>
-        </div>})
+            </a>
+        })
     }
 
     return (
         <div className='NftList'>
-            <div className='NftListSearchWrapper'>
+            {nfts.length !== 0 && <div className='NftListSearchWrapper'>
                 <Dropdown options={ ownedNftsCollections } onChange={ setCollectionFilter } value={ collectionsEmptyFilter } placeholder={ collectionsEmptyFilter } />
                 <input className='NftListSearchBar' onChange={ (s) => { setSearchBarState(s.target.value.toLowerCase()) } }></input>
-            </div>
+            </div>}
             <div className='NftListCardsWrapper'>{ renderNfts() }</div>
         </div>
     )

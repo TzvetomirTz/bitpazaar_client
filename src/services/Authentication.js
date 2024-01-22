@@ -60,9 +60,20 @@ const setAccessCookie = (acsToken, walletName) => {
         })
 }
 
+const tryToContinueSessionIfNeeded = async (authenticatedToBackend, stateConnectWallet, authenticateToBackend) => {
+    if(!authenticatedToBackend) {
+        const acsToken = cookies.get(ACCESS_TOKEN_COOKIE_NAME).acsToken
+
+        await connectWallet(stateConnectWallet)
+        await authenticateToBackend(acsToken)
+
+    }
+}
+
 const Authentication = {
     connectWallet,
-    generateAcsToken
+    generateAcsToken,
+    tryToContinueSessionIfNeeded
 }
 
 export default Authentication

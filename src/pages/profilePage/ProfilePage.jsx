@@ -12,6 +12,7 @@ import etherscranIcon from '../../assets/etherscan_logo.svg'
 import copyIcon from '../../assets/copy_icon.svg'
 import plusIcon from '../../assets/plus_icon.svg'
 import loadingAnimation from '../../assets/animations/loading_animation.gif'
+import Authentication from '../../services/Authentication'
 
 function ProfilePage() {
   const { profileAddress } = useParams()
@@ -20,7 +21,12 @@ function ProfilePage() {
   const [hmNftsOwned, setHmNftsOwned] = useState(0)
   const [ownedNfts, setOwnedNfts] = useState([])
   const signer = authState((state) => state.signer)
-  const [nftListIsLoading, setNftListIsLoading] = useState(false);
+  const [nftListIsLoading, setNftListIsLoading] = useState(false)
+	const stateConnectWallet = authState((state) => state.connectWallet)
+	const authenticatedToBackend = authState((state) => state.authenticatedToBackend)
+	const authenticateToBackend = authState((state) => state.authenticateToBackend)
+
+  Authentication.tryToContinueSessionIfNeeded(authenticatedToBackend, stateConnectWallet, authenticateToBackend)
 
   React.useEffect(() => {
     (async () => {
@@ -28,12 +34,12 @@ function ProfilePage() {
         loadProfileNfts()
       }
     })()
-  }, [])
+  }, [authenticatedToBackend])
 
   const loadProfileNfts = async () => {
     setNftListIsLoading(true)
 
-    const nftData = await ProfileClient.getNftsByOwner(accessKey, "0x300e31AAF34aB0327Eaf6624C543Dbe19f44bbd3") // ToDo: replace addr
+    const nftData = await ProfileClient.getNftsByOwner(accessKey, profileAddress) // ToDo: replace addr
     setHmNftsOwned(nftData.nftsCount)
     setOwnedNfts(nftData.nfts)
 

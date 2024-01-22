@@ -52,7 +52,7 @@ function AuthPage() {
 	}
 
 	const authToBackend = async () => {
-		const accToken = await Authentication.generateAcsToken(provider, signer)
+		const accToken = await Authentication.generateAcsToken(provider, signer, "metamask")
 
 		if(accToken !== "") {
 			authenticateToBackend(accToken)

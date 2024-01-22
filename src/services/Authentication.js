@@ -1,15 +1,20 @@
+import Cookies from 'universal-cookie'
+import { jwtDecode } from "jwt-decode"
 const { ethers } = require('ethers')
 const AuthClient = require('../clients/AuthClient').default
 
+const cookies = new Cookies(null, { path: '/' })
+const ACCESS_TOKEN_COOKIE_NAME = 'acsTkn'
+
 const connectWallet = async (stateConnectWallet) => {
     const provider = new ethers.BrowserProvider(window.ethereum, "any")
-			let signer = null
+    let signer = null
 
-			signer = await provider.getSigner()
-			await stateConnectWallet(provider, signer)
+    signer = await provider.getSigner()
+    await stateConnectWallet(provider, signer)
 }
 
-const generateAcsToken = async (provider, signer) => {
+const generateAcsToken = async (provider, signer, walletName) => {
     const domain = {
         name: 'BitPazaar',
         chainId: (await provider.getNetwork()).chainId
@@ -35,10 +40,24 @@ const generateAcsToken = async (provider, signer) => {
 
     try {
         const signature = await signer.signTypedData(domain, types, authPayload)
-        return await AuthClient.getAcsToken(wltAddr, action, ogTs, signature)
+        const acsToken = await AuthClient.getAcsToken(wltAddr, action, ogTs, signature)
+        setAccessCookie(acsToken, walletName)
+
+        return acsToken
     } catch (exception) {
+        console.log(exception);
         return ""
     }
+}
+
+const setAccessCookie = (acsToken, walletName) => {
+    cookies.set(ACCESS_TOKEN_COOKIE_NAME,
+        JSON.stringify({
+            acsToken, walletName
+        }),
+        {
+            expires: new Date(jwtDecode(acsToken).endDate)
+        })
 }
 
 const Authentication = {

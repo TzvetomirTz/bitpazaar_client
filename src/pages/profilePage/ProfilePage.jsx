@@ -34,9 +34,10 @@ function ProfilePage() {
         loadProfileNfts()
       }
     })()
-  }, [authenticatedToBackend])
+  }, [authenticatedToBackend, profileAddress])
 
   const loadProfileNfts = async () => {
+    setOwnedNfts([]) // Clear state when navigating
     setNftListIsLoading(true)
 
     const nftData = await ProfileClient.getNftsByOwner(accessKey, profileAddress) // ToDo: replace addr

@@ -16,7 +16,7 @@ root.render(
         <Route path="/" element={ <HomePage /> } />
           <Route path="/profile/:profileAddress" element={ <ProfilePage /> } />
           <Route path='/auth' element={ <AuthPage /> } />
-          <Route path='/collections/:collection/nft/:nft' element={ <NftPage />} />
+          <Route path='/collections/:collectionAddress/nft/:nftId' element={ <NftPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

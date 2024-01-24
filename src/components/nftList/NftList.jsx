@@ -5,12 +5,10 @@ import { useState, useEffect, useCallback } from 'react'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css';
 import './NftListDropdown.css'
-import { useNavigate } from 'react-router-dom';
 
 function NftList(props) {
     const { nfts } = props
     const collectionsEmptyFilter = "All Collections"
-    const navigate = useNavigate();
 
     const [nftsToRender, setNftsToRender] = useState(nfts)
     const [searchBarState, setSearchBarState] = useState("")

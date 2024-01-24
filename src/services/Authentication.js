@@ -62,11 +62,14 @@ const setAccessCookie = (acsToken, walletName) => {
 
 const tryToContinueSessionIfNeeded = async (authenticatedToBackend, stateConnectWallet, authenticateToBackend) => {
     if(!authenticatedToBackend) {
-        const acsToken = cookies.get(ACCESS_TOKEN_COOKIE_NAME).acsToken
+        const acsCookie = cookies.get(ACCESS_TOKEN_COOKIE_NAME)
 
-        await connectWallet(stateConnectWallet)
-        await authenticateToBackend(acsToken)
+        if(acsCookie !== undefined) {
+            const acsToken = cookies.get(ACCESS_TOKEN_COOKIE_NAME).acsToken
 
+            await connectWallet(stateConnectWallet)
+            await authenticateToBackend(acsToken)
+        }
     }
 }
 

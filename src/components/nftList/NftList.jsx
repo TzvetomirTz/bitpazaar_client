@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css';
 import './NftListDropdown.css'
+import Nft from '../../services/nft/Nft'
 
 function NftList(props) {
     const { nfts } = props
@@ -29,7 +30,7 @@ function NftList(props) {
 				newNftsToRender = nfts
 			} else {
                 nfts.forEach(n => {
-                    if(determineNftCollectionName(n) === collectionFilter.value) {
+                    if(Nft.determineCollectionNameOfNft(n) === collectionFilter.value) {
                         newNftsToRender.push(n)
                     }
                 })
@@ -47,26 +48,21 @@ function NftList(props) {
 		})()
 	}, [collectionFilter, searchBarState])
 
-    const determineNftCollectionName = (nft) => {
-        return nft.contract.openSeaMetadata.collectionName !== undefined ?
-        nft.contract.openSeaMetadata.collectionName : nft.contract.name
-    }
-
     const determineNftPageUrl = (nft) => {
-            return '/collections/' + nft.contract.address + '/nft/' + nft.tokenId
-        }
+        return '/collections/' + nft.contract.address + '/nft/' + nft.tokenId
+    }
 
     const renderNfts = () => {
         return nftsToRender.map((n) => {
-            const collectionName = determineNftCollectionName(n)
-            const nftName = n.name !== undefined ? n.name : collectionName + " #" + n.tokenId
+            const collectionName = Nft.determineCollectionNameOfNft(n)
+            const nftName = Nft.determineNameOfNft(n)
 
             if (!ownedNftsCollections.includes(collectionName)) {
                 setOwnedNftsCollections([...ownedNftsCollections, collectionName])
             }
 
             // Render starts here
-            return <a className='NftCard' href={determineNftPageUrl(n)}>
+            return <a className='NftCard' href={ determineNftPageUrl(n) }>
                 <div className='NftCardVisualWrapper'>
                     <MediaSquare nft={n}/>
                 </div>

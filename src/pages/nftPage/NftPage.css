@@ -1,3 +1,71 @@
+.NftPage {
+    display: flex;
+    flex-direction: column;
+}
+
 .NftDataWrapper {
+    width: auto;
+    padding: 2rem;
+    display: flex;
+}
+
+.NftPageVisualWrapper {
+    display: flex;
+    width: 50rem;
+    overflow: hidden;
+    border-radius: var(--border-radius-s);
+}
+
+.NftPageDetailsWrapper {
+    margin-left: 2rem;
+    flex: 1;
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.NftPageNftName {
     color: var(--light-color-1);
+    font-size: 2rem;
+}
+
+.NftPageNftCollectionNameOuterWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.NftPageNftCollectionNameWrapper {
+    display: flex;
+    border: 1px solid var(--dark-color);
+    border-radius: var(--border-radius-s);
+    align-content: center;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.NftPageNftCollectionName {
+    background-color: var(--light-color-1);
+    color: var(--dark-color);
+    display: flex;
+    align-items: center;
+    padding: 0rem 1rem;
+}
+
+.NftPageNftCollectionTotalSupply {
+    background-color: var(--dark-color);
+    color: var(--light-color-1);
+    padding: 0.2rem 1rem;
+}
+
+.NftPageNftOwnerWrapper {
+    margin-top: 1rem;
+    color: var(--light-color-1);
+    text-decoration: none;
+}
+
+.NftPageNftOwnerWrapper:hover {
+    color: var(--light-color-2);
 }

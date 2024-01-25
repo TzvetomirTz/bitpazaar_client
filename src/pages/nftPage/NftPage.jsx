@@ -6,8 +6,9 @@ import { authState } from '../../state/AuthState'
 import { useParams } from 'react-router-dom'
 import Nft from '../../services/nft/Nft'
 import React, { useState } from 'react'
+import MediaSquare from '../../components/MediaSquare/MediaSquare'
 
-function NftPage() {
+function NftPage() { // ToDo: Find a way to parameterize the render of this page and if possible skip lambda call when redir from collection
 	const { collectionAddress, nftId } = useParams()
 	const [nftData, setNftData] = useState({})
 	const [nftDataIsLoading, setNftDataIsLoading] = useState(false)
@@ -29,16 +30,33 @@ function NftPage() {
 	const loadNftData = async () => {
 		setNftDataIsLoading(true)
 		setNftData(await Nft.getNftData(collectionAddress, nftId, accessKey))
-		console.log(JSON.stringify(await Nft.getNftData(collectionAddress, nftId, accessKey)));
 		setNftDataIsLoading(false)
+	}
+
+	const determineOwnerProfileUrl = () => {
+		return "/profile/" + Nft.determineNftOwner(nftData)
 	}
 
 	return (
 		<div className='NftPage'>
 			<TopBar />
 			<TopBarSpacer />
-			{!nftDataIsLoading && <div className='NftDataWrapper'>
-				{nftData.tokenId}
+			{!nftDataIsLoading && Object.keys(nftData).length !== 0 && <div className='NftDataWrapper'>
+				<div className='NftPageVisualWrapper'>
+					<MediaSquare className="NftPageVisual" nft={ nftData } />
+				</div>
+				<div className='NftPageDetailsWrapper'>
+					<div className='NftPageNftName'>{ Nft.determineNameOfNft(nftData) }</div>
+					<div className='NftPageNftCollectionNameOuterWrapper'>
+						<a className='NftPageNftCollectionNameWrapper' href='whatever.com'>
+							<div className='NftPageNftCollectionName'>{ Nft.determineCollectionNameOfNft(nftData) }</div>
+							<div className='NftPageNftCollectionTotalSupply'>Total supply: {Nft.determineTotalSupplyOfNftCollection(nftData)}</div>
+						</a>
+					</div>
+					<a className='NftPageNftOwnerWrapper' href={ determineOwnerProfileUrl() }>
+						Owned by: { Nft.determineNftOwner(nftData) }
+					</a>
+				</div>
 			</div>}
 		</div>
 	)

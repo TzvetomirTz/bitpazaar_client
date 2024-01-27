@@ -51,12 +51,20 @@ function NftPage() { // ToDo: Find a way to parameterize the render of this page
 					<div className='NftPageNftCollectionNameOuterWrapper'>
 						<a className='NftPageNftCollectionNameWrapper' href='whatever.com'>
 							<div className='NftPageNftCollectionName'>{ Nft.determineCollectionNameOfNft(nftData) }</div>
-							<div className='NftPageNftCollectionTotalSupply'>Total supply: {Nft.determineTotalSupplyOfNftCollection(nftData)}</div>
+							<div className='NftPageNftCollectionTotalSupply'>Total supply: { Nft.determineTotalSupplyOfNftCollection(nftData) }</div>
 						</a>
 					</div>
 					<a className='NftPageNftOwnerWrapper' href={ determineOwnerProfileUrl() }>
 						Owned by: { Nft.determineNftOwner(nftData) }
 					</a>
+					<div className='NftPageNftFloorPriceWrapper'>Floor Price: { Nft.determineNftFloorPrice(nftData) }</div>
+					<div className='NftPageAskBidWrapper'>
+						<div className="NftPageAskButton NoSelect">Current Price: 1 WETH</div>
+						<div className="NftPageBidButton NoSelect">Current Bid: 0.8 WETH</div>
+					</div>
+				</div>
+				<div className='NftPageRarityWrapper'>
+					
 				</div>
 			</div>}
 		</div>

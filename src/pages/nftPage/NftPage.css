@@ -1,6 +1,7 @@
 .NftPage {
     display: flex;
     flex-direction: column;
+    color: var(--light-color-1);
 }
 
 .NftDataWrapper {
@@ -11,7 +12,7 @@
 
 .NftPageVisualWrapper {
     display: flex;
-    width: 50rem;
+    width: 40rem;
     overflow: hidden;
     border-radius: var(--border-radius-s);
 }
@@ -26,7 +27,6 @@
 }
 
 .NftPageNftName {
-    color: var(--light-color-1);
     font-size: 2rem;
 }
 
@@ -68,4 +68,40 @@
 
 .NftPageNftOwnerWrapper:hover {
     color: var(--light-color-2);
+}
+
+.NftPageNftFloorPriceWrapper {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+}
+
+.NftPageAskBidWrapper {
+    display: flex;
+    margin-top: 1rem;
+    flex-direction: row;
+}
+
+.NftPageAskButton, .NftPageBidButton {
+    padding: 1rem;
+    border-radius: var(--border-radius-s);
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.NftPageAskButton {
+    background-color: var(--light-color-1);
+    color: var(--dark-color);
+}
+
+.NftPageBidButton {
+    background-color: var(--dark-color);
+    margin-left: 1rem;
+}
+
+.NftPageBidButton:hover {
+    border: 1px solid var(--light-color-1);
+}
+
+.NftPageAskButton:hover {
+    background-color: var(--light-color-2);
 }

@@ -19,6 +19,7 @@ function NftList(props) {
     useEffect(() => {
         (async () => {
             setNftsToRender(nfts)
+            determineCollectionFilters()
         })()
     }, [nfts])
 
@@ -52,24 +53,20 @@ function NftList(props) {
         return '/collections/' + nft.contract.address + '/nft/' + nft.tokenId
     }
 
+    const determineCollectionFilters = () => {
+        setOwnedNftsCollections(Array.from(new Set([collectionsEmptyFilter, ...nfts.map(n => Nft.determineCollectionNameOfNft(n))])))
+    }
+
     const renderNfts = () => {
         return nftsToRender.map((n) => {
-            const collectionName = Nft.determineCollectionNameOfNft(n)
-            const nftName = Nft.determineNameOfNft(n)
-
-            if (!ownedNftsCollections.includes(collectionName)) {
-                setOwnedNftsCollections([...ownedNftsCollections, collectionName])
-            }
-
-            // Render starts here
             return <a className='NftCard' href={ determineNftPageUrl(n) }>
                 <div className='NftCardVisualWrapper'>
                     <MediaSquare nft={n}/>
                 </div>
                 <div className='NftCardDetails'>
-                    <div className='NftCardName'>{ nftName }</div>
+                    <div className='NftCardName'>{ Nft.determineNameOfNft(n) }</div>
                     <div className='NftCardCollectionName'>
-                        { collectionName }
+                        { Nft.determineCollectionNameOfNft(n) }
                     </div>
                     <div className='NftCardPriceWrapper'>
                         <div className='NftCardPriceText'>Floor</div>

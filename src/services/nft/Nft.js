@@ -21,9 +21,14 @@ const determineNftOwner = (nft) => {
     return nft.owners[0]
 }
 
+const determineNftFloorPrice = (nft) => {
+    return nft.contract.openSeaMetadata.floorPrice || "--.--"
+}
+
 const Nft = {
     determineTotalSupplyOfNftCollection,
     determineCollectionNameOfNft,
+    determineNftFloorPrice,
     determineNameOfNft,
     determineNftOwner,
     getNftData

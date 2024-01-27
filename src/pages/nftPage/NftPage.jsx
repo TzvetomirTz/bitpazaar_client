@@ -31,6 +31,7 @@ function NftPage() { // ToDo: Find a way to parameterize the render of this page
 		setNftDataIsLoading(true)
 		setNftData(await Nft.getNftData(collectionAddress, nftId, accessKey))
 		setNftDataIsLoading(false)
+		console.log(JSON.stringify(nftData));
 	}
 
 	const determineOwnerProfileUrl = () => {
@@ -43,7 +44,7 @@ function NftPage() { // ToDo: Find a way to parameterize the render of this page
 			<TopBarSpacer />
 			{!nftDataIsLoading && Object.keys(nftData).length !== 0 && <div className='NftDataWrapper'>
 				<div className='NftPageVisualWrapper'>
-					<MediaSquare className="NftPageVisual" nft={ nftData } />
+					<MediaSquare className="NftPageVisual" nft={ nftData } resizePxIfPossible={ 2000 } />
 				</div>
 				<div className='NftPageDetailsWrapper'>
 					<div className='NftPageNftName'>{ Nft.determineNameOfNft(nftData) }</div>

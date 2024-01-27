@@ -61,7 +61,7 @@ function NftList(props) {
         return nftsToRender.map((n) => {
             return <a className='NftCard' href={ determineNftPageUrl(n) }>
                 <div className='NftCardVisualWrapper'>
-                    <MediaSquare nft={n}/>
+                    <MediaSquare nft={n} />
                 </div>
                 <div className='NftCardDetails'>
                     <div className='NftCardName'>{ Nft.determineNameOfNft(n) }</div>
@@ -71,7 +71,7 @@ function NftList(props) {
                     <div className='NftCardPriceWrapper'>
                         <div className='NftCardPriceText'>Floor</div>
                         <img className='NftCardEtherIcon' src={ etherIcon } alt='' />
-                        <div className='NftCardPrice'>{ n.contract.openSeaMetadata.floorPrice }</div>
+                        <div className='NftCardPrice'>{ Nft.determineNftFloorPrice(n) }</div>
                     </div>
                 </div>
             </a>

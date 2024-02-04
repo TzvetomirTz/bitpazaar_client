@@ -105,3 +105,58 @@
 .NftPageAskButton:hover {
     background-color: var(--light-color-2);
 }
+
+.NftPageRarityWrapper {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.NftPageRarity {
+    background-color: var(--dark-color);
+    border-radius: var(--border-radius-s);
+    overflow: hidden;
+    border: 1px solid var(--light-color-1);
+}
+
+.NftPageRarityTitle {
+    background-color: var(--light-color-1);
+    color: var(--dark-color);
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem;
+}
+
+.NftPageRarityAttributesWrapper {
+    display: flex;
+}
+
+.NftPageRarityAttribute {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.NftPageRarityAttributesWrapper .NftPageRarityAttribute:not(:last-child) {
+    border-right: 1px solid var(--light-color-1);
+}
+
+.NftPageRarityAttributeType {
+    border-bottom: 1px solid var(--light-color-1);
+    padding: 0.5rem;
+}
+
+.NftPageRarityAttributeType, .NftPageRarityAttributeValue, .NftPageRarityAttributePrevalence {
+    justify-content: center;
+    display: flex;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.NftPageRarityAttributeValue {
+    padding-top: 0.5rem;
+}
+
+.NftPageRarityAttributePrevalence {
+    padding-bottom: 0.5rem;
+}

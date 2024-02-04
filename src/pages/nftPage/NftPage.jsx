@@ -11,7 +11,9 @@ import MediaSquare from '../../components/MediaSquare/MediaSquare'
 function NftPage() { // ToDo: Find a way to parameterize the render of this page and if possible skip lambda call when redir from collection
 	const { collectionAddress, nftId } = useParams()
 	const [nftData, setNftData] = useState({})
+	const [nftRarity, setNftRarity] = useState([])
 	const [nftDataIsLoading, setNftDataIsLoading] = useState(false)
+	const [nftRarityIsLoading, setNftRarityIsLoading] = useState(true)
 	const accessKey = authState((state) => state.accessKey)
 	const stateConnectWallet = authState((state) => state.connectWallet)
 	const authenticatedToBackend = authState((state) => state.authenticatedToBackend)
@@ -29,9 +31,14 @@ function NftPage() { // ToDo: Find a way to parameterize the render of this page
 
 	const loadNftData = async () => {
 		setNftDataIsLoading(true)
-		setNftData(await Nft.getNftData(collectionAddress, nftId, accessKey))
+		setNftData(await Nft.getNftData(collectionAddress, nftId, accessKey)) // Use the optional to set the loading to false
 		setNftDataIsLoading(false)
-		console.log(JSON.stringify(nftData));
+
+		setNftRarityIsLoading(true)
+		setNftRarity(await Nft.getNftRarity(collectionAddress, nftId, accessKey)) // Use the optional to set the loading to false
+		setNftRarityIsLoading(false)
+
+		console.log(JSON.stringify(nftRarity))
 	}
 
 	const determineOwnerProfileUrl = () => {
@@ -63,8 +70,19 @@ function NftPage() { // ToDo: Find a way to parameterize the render of this page
 						<div className="NftPageBidButton NoSelect">Current Bid: 0.8 WETH</div>
 					</div>
 				</div>
-				<div className='NftPageRarityWrapper'>
-					
+			</div>}
+			{!nftRarityIsLoading && <div className='NftPageRarityWrapper'>
+				<div className='NftPageRarity'>
+					<div className='NftPageRarityTitle'>Rarity Attributes</div>
+					<div className='NftPageRarityAttributesWrapper'>
+						{nftRarity.map((a) => {
+							return <div className='NftPageRarityAttribute'>
+								<div className='NftPageRarityAttributeType'>{ a.traitType }</div>
+								<div className='NftPageRarityAttributeValue'>{ a.value }</div>
+								<div className='NftPageRarityAttributePrevalence'>{ a.prevalence.toFixed(4) }</div>
+							</div>
+						})}
+					</div>
 				</div>
 			</div>}
 		</div>

@@ -4,6 +4,10 @@ const getNftData = async (collectionAddress, nftId, accessKey) => {
     return NftClient.getNftData(collectionAddress, nftId, accessKey)
 }
 
+const getNftRarity = async (collectionAddress, nftId, accessKey) => {
+    return NftClient.getNftRarity(collectionAddress, nftId, accessKey)
+}
+
 const determineCollectionNameOfNft = (nft) => { // Don't ever make this async, it would break a couple of renders
     return nft.contract.openSeaMetadata.collectionName !== undefined ?
     nft.contract.openSeaMetadata.collectionName : nft.contract.name
@@ -31,6 +35,7 @@ const Nft = {
     determineNftFloorPrice,
     determineNameOfNft,
     determineNftOwner,
+    getNftRarity,
     getNftData
 }
 

@@ -79,7 +79,7 @@ function NftPage() { // ToDo: Find a way to parameterize the render of this page
 							return <div className='NftPageRarityAttribute'>
 								<div className='NftPageRarityAttributeType'>{ a.traitType }</div>
 								<div className='NftPageRarityAttributeValue'>{ a.value }</div>
-								<div className='NftPageRarityAttributePrevalence'>{ a.prevalence.toFixed(4) }</div>
+								<div className='NftPageRarityAttributePrevalence'>{ (a.prevalence * 100).toFixed(2) } %</div>
 							</div>
 						})}
 					</div>

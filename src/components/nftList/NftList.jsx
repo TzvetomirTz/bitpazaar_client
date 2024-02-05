@@ -8,7 +8,7 @@ import './NftListDropdown.css'
 import Nft from '../../services/nft/Nft'
 
 function NftList(props) {
-    const { nfts } = props
+    const { nfts, showCollectionsFilter = true } = props
     const collectionsEmptyFilter = "All Collections"
 
     const [nftsToRender, setNftsToRender] = useState(nfts)
@@ -81,7 +81,7 @@ function NftList(props) {
     return (
         <div className='NftList'>
             {nfts.length !== 0 && <div className='NftListSearchWrapper'>
-                <Dropdown options={ ownedNftsCollections } onChange={ setCollectionFilter } value={ collectionsEmptyFilter } placeholder={ collectionsEmptyFilter } />
+                {showCollectionsFilter && <Dropdown options={ ownedNftsCollections } onChange={ setCollectionFilter } value={ collectionsEmptyFilter } placeholder={ collectionsEmptyFilter } />}
                 <input className='NftListSearchBar' onChange={ (s) => { setSearchBarState(s.target.value.toLowerCase()) } }></input>
             </div>}
             <div className='NftListCardsWrapper'>{ renderNfts() }</div>

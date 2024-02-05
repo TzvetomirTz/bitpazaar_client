@@ -27,23 +27,31 @@ function NftPage() { // ToDo: Find a way to parameterize the render of this page
 			loadNftData()
 		  }
 		})()
-	  }, [authenticatedToBackend, collectionAddress, nftId])
+	}, [authenticatedToBackend, collectionAddress, nftId])
 
 	const loadNftData = async () => {
 		setNftDataIsLoading(true)
-		setNftData(await Nft.getNftData(collectionAddress, nftId, accessKey)) // Use the optional to set the loading to false
-		setNftDataIsLoading(false)
+		Nft.getNftData(collectionAddress, nftId, accessKey).then((res) => {
+			setNftData(res)
+			setNftDataIsLoading(false)
+		})
 
 		setNftRarityIsLoading(true)
-		setNftRarity(await Nft.getNftRarity(collectionAddress, nftId, accessKey)) // Use the optional to set the loading to false
-		setNftRarityIsLoading(false)
-
-		console.log(JSON.stringify(nftRarity))
+		Nft.getNftRarity(collectionAddress, nftId, accessKey).then((res) => {
+			setNftRarity(res)
+			setNftRarityIsLoading(false)
+		}).catch((err) => {
+			console.log("Failed to load rarity data"); 
+		})
 	}
 
 	const determineOwnerProfileUrl = () => {
 		return "/profile/" + Nft.determineNftOwner(nftData)
 	}
+
+	const determineNftCollectionUrl = (nft) => {
+        return '/collections/' + nft.contract.address
+    }
 
 	return (
 		<div className='NftPage'>
@@ -56,7 +64,7 @@ function NftPage() { // ToDo: Find a way to parameterize the render of this page
 				<div className='NftPageDetailsWrapper'>
 					<div className='NftPageNftName'>{ Nft.determineNameOfNft(nftData) }</div>
 					<div className='NftPageNftCollectionNameOuterWrapper'>
-						<a className='NftPageNftCollectionNameWrapper' href='whatever.com'>
+						<a className='NftPageNftCollectionNameWrapper' href={ determineNftCollectionUrl(nftData) }>
 							<div className='NftPageNftCollectionName'>{ Nft.determineCollectionNameOfNft(nftData) }</div>
 							<div className='NftPageNftCollectionTotalSupply'>Total supply: { Nft.determineTotalSupplyOfNftCollection(nftData) }</div>
 						</a>
@@ -73,7 +81,7 @@ function NftPage() { // ToDo: Find a way to parameterize the render of this page
 			</div>}
 			{!nftRarityIsLoading && <div className='NftPageRarityWrapper'>
 				<div className='NftPageRarity'>
-					<div className='NftPageRarityTitle'>Rarity Attributes</div>
+					<div className='NftPageRarityTitle NoSelect'>Rarity Attributes</div>
 					<div className='NftPageRarityAttributesWrapper'>
 						{nftRarity.map((a) => {
 							return <div className='NftPageRarityAttribute'>

@@ -6,6 +6,7 @@ import HomePage from './pages/homePage/HomePage.jsx'
 import ProfilePage from './pages/profilePage/ProfilePage'
 import AuthPage from './pages/authPage/AuthPage.jsx'
 import NftPage from './pages/nftPage/NftPage.jsx'
+import CollectionPage from './pages/collectionPage/CollectionPage.jsx'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
@@ -14,9 +15,10 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={ <HomePage /> } />
-          <Route path="/profile/:profileAddress" element={ <ProfilePage /> } />
-          <Route path='/auth' element={ <AuthPage /> } />
-          <Route path='/collections/:collectionAddress/nft/:nftId' element={ <NftPage />} />
+          <Route path="profile/:profileAddress" element={ <ProfilePage /> } />
+          <Route path='auth' element={ <AuthPage /> } />
+          <Route path='collections/:collectionAddress' element={ <CollectionPage />} />
+          <Route path='collections/:collectionAddress/nft/:nftId' element={ <NftPage />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

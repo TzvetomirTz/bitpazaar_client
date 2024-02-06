@@ -30,6 +30,7 @@ function CollectionPage() {
     const loadCollectionData = async () => {
         setCollectionDataIsLoading(true)
         Collection.getCollectionData(collectionAddress, accessKey).then((res) => {
+            console.log(JSON.stringify(res))
             setCollectionData(res)
             setCollectionDataIsLoading(false)
         })
@@ -44,7 +45,7 @@ function CollectionPage() {
                 <div className='CollectionPageBannerWrapper'>
                     <img className='CollectionPageBanner' src={ collectionData[0].collection.bannerImageUrl } />
                 </div>
-                <div className='CollectionPageTitle'>Collection Title</div>
+                <div className='CollectionPageTitle'>{ collectionData[0].collection.name }</div>
                 <NftList className="NftList" nfts={ collectionData } showCollectionsFilter={false} />
             </div>}
         </div>

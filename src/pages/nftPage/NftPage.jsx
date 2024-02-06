@@ -83,13 +83,16 @@ function NftPage() { // ToDo: Find a way to parameterize the render of this page
 				<div className='NftPageRarity'>
 					<div className='NftPageRarityTitle NoSelect'>Rarity Attributes</div>
 					<div className='NftPageRarityAttributesWrapper'>
-						{nftRarity.map((a) => {
+						{nftRarity.length > 0 && nftRarity.map((a) => {
 							return <div className='NftPageRarityAttribute'>
 								<div className='NftPageRarityAttributeType'>{ a.traitType }</div>
 								<div className='NftPageRarityAttributeValue'>{ a.value }</div>
 								<div className='NftPageRarityAttributePrevalence'>{ (a.prevalence * 100).toFixed(2) } %</div>
 							</div>
 						})}
+						{nftRarity.length === 0 && <div className='NftPageRarityAttribute'>
+							<div className='NftPageEmptyRarityAttribute'>No rarity attributes to be shown</div>
+						</div>}
 					</div>
 				</div>
 			</div>}

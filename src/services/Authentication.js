@@ -1,5 +1,6 @@
 import Cookies from 'universal-cookie'
 import { jwtDecode } from "jwt-decode"
+import {inspect} from 'util'
 const { ethers } = require('ethers')
 const AuthClient = require('../clients/AuthClient').default
 
@@ -7,11 +8,19 @@ const cookies = new Cookies(null, { path: '/' })
 const ACCESS_TOKEN_COOKIE_NAME = 'acsTkn'
 
 const connectWallet = async (stateConnectWallet) => {
-    const provider = new ethers.BrowserProvider(window.ethereum, "any")
-    let signer = null
-
-    signer = await provider.getSigner()
-    await stateConnectWallet(provider, signer)
+    if(window.ethereum.isMetaMask) {
+        const provider = new ethers.BrowserProvider(window.ethereum, "any")
+        let signer = null
+    
+        try {
+            signer = await provider.getSigner()
+            await stateConnectWallet(provider, signer)
+        } catch (err) {
+            console.log("Concurrent metamask authentications triggered!")
+        }
+    } else {
+        console.log("Get MetaMask")
+    }
 }
 
 const generateAcsToken = async (provider, signer, walletName) => {
@@ -63,8 +72,6 @@ const setAccessCookie = (acsToken, walletName) => {
 const tryToContinueSessionIfNeeded = async (authenticatedToBackend, stateConnectWallet, authenticateToBackend) => {
     if(!authenticatedToBackend) {
         const acsCookie = cookies.get(ACCESS_TOKEN_COOKIE_NAME)
-        
-        console.log(acsCookie);
 
         if(acsCookie !== undefined) {
             const acsToken = cookies.get(ACCESS_TOKEN_COOKIE_NAME).acsToken

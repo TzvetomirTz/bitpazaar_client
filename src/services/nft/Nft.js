@@ -18,7 +18,7 @@ const determineNameOfNft = (nft) => { // Don't ever make this async, it would br
 }
 
 const determineTotalSupplyOfNftCollection = (nft) => {
-    return nft.contract.totalSupply
+    return nft.contract.totalSupply || "???"
 }
 
 const determineNftOwner = (nft) => {

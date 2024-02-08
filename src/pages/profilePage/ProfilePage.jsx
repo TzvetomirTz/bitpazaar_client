@@ -58,7 +58,7 @@ function ProfilePage() {
           </div>
           <div className='ProfileDetailsWrapper'>
             <div className='NicknameWrapper'>
-              <div className='Nickname'>DEFAULT_DADDY</div>
+              <div className='Nickname'>Random Citizen</div>
             </div>
             <div className='ProfileAddressWrapper NoSelect' onClick={() => {Clipboard.copyToClipboard(profileAddress)}}>
               Address: { profileAddress }

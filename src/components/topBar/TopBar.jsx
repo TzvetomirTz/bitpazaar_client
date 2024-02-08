@@ -8,11 +8,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import Balance from '../../services/Balance';
 import { useNavigate } from 'react-router-dom';
 import walletIcon from '../../assets/wallet_icon.svg';
+import Search from '../../services/Search';
 
 function TopBar() {
   const navigate = useNavigate();
   const [searchBarState, setSearchBarState] = useState("");
-  const [searchResName, setSearchResName] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
+	const accessKey = authState((state) => state.accessKey)
   const signer = authState((state) => state.signer);
   const provider = authState((state) => state.provider);
   const walletConnected = authState((state) => state.walletConnected);
@@ -29,17 +31,16 @@ function TopBar() {
 
   React.useEffect(() => {
     (async () => {
-      if(searchBarState !== "") {
-        if(isAddress(searchBarState.target.value)) {
-          setSearchResName(await erc721Adapter.getErc721Name(signer, searchBarState.target.value)); // Must be connected to wallet
-        } else {
-          setSearchResName("");
-        }
-      } else {
-        setSearchResName("");
+      if(searchBarState.target && searchBarState.target.value.length > 2) {
+        const searchDelayDebounce = setTimeout(async () => {
+          console.log(JSON.stringify(await Search.search(searchBarState.target.value, accessKey)));
+          setSearchResult(await Search.search(searchBarState.target.value, accessKey))
+        }, 1000);
+  
+        return () => clearTimeout(searchDelayDebounce)
       }
     })()
-  }, [searchBarState, signer]);
+  }, [searchBarState]);
 
   const updateBalance = async () => {
     setEthBalance(Number(await Balance.getEthBalance(provider, signer)).toFixed(4));
@@ -96,9 +97,13 @@ function TopBar() {
       </div>
       <div className='SearchWrapper'>
         <input className='SearchBar' onKeyDown={handleKeyDown} onChange={setSearchBarState}></input>
-        {searchResName !== "" && 
+        {true && 
           <div className='SearchResWrapper'>
-            <div className='SearchRes'>{searchResName}</div>
+            <div className='SearchRes'>{
+              searchResult.map(r => {
+                return <div>{r.name}</div>
+              })
+            }</div>
           </div>
         }
       </div>

@@ -69,13 +69,18 @@
     width: 40rem;
     height: 16rem;
     position: absolute;
-    background: none;
+    background-color: var(--dark-color);
+    /* overflow: hidden; */
     overflow-y: scroll;
     border: 1px solid #fff;
 }
 
 .SearchBar:focus + .SearchResWrapper {
     display: block;
+}
+
+.SearchRes {
+    color: var(--light-color-1);
 }
 
 .AuthWrapper {

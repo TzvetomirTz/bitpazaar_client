@@ -4,8 +4,13 @@ const getCollectionData = async (contractAddress, accessKey, startToken = 0, lim
     return CollectionClient.getCollectionData(contractAddress, accessKey, startToken, limit)
 }
 
+const getCollectionImageUrl = (collection) => {
+    return collection.openSeaMetadata.imageUrl
+}
+
 const Collection = {
-    getCollectionData
+    getCollectionData,
+    getCollectionImageUrl
 }
 
 export default Collection

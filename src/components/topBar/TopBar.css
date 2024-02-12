@@ -67,20 +67,53 @@
     margin-top: 1rem;
     padding: 1rem;
     width: 40rem;
-    height: 16rem;
+    /* height: 16rem; */
     position: absolute;
     background-color: var(--dark-color);
-    /* overflow: hidden; */
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     border: 1px solid #fff;
+    transition: display 1s;
 }
 
 .SearchBar:focus + .SearchResWrapper {
     display: block;
 }
 
+.SearchResLine:focus + .SearchResWrapper {
+    display: block;
+}
+
+.SearchResSeparator {
+    color: var(--light-color-1);
+    margin-bottom: 1rem;
+}
+
 .SearchRes {
     color: var(--light-color-1);
+}
+
+.SearchResLine {
+    margin-bottom: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+}
+
+.SearchResLine:hover {
+    background-color: var(--dark-color-2);
+}
+
+.SearchResLineImage {
+    height: 3rem;
+    width: 3rem;
+    margin-right: 1rem;
+}
+
+.SearchResLineText {
+    color: var(--light-color-1);
+    text-decoration: none;
 }
 
 .AuthWrapper {

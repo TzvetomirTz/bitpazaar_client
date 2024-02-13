@@ -1,6 +1,6 @@
 import './TopBar.css'
 import Logo from '../logo/Logo'
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useRef } from 'react'
 import { isAddress } from 'web3-validator'
 import erc721Adapter from '../../services/contracts/Erc721Adapter'
 import { authState } from '../../state/AuthState'
@@ -21,6 +21,8 @@ function TopBar() {
   const walletConnected = authState((state) => state.walletConnected)
   const [ethBalance, setEthBalance] = useState("0.0000")
   const [wethBalance, setWethBalance] = useState("0.0000")
+  const [showSearchResults, setShowSearchResults] = useState(false)
+  const searchRef = useRef(null)
 
   React.useEffect(() => {
     (async () => {
@@ -28,7 +30,7 @@ function TopBar() {
         updateBalance();
       }
     })()
-  }, [walletConnected]);
+  }, [walletConnected])
 
   React.useEffect(() => {
     (async () => {
@@ -40,18 +42,35 @@ function TopBar() {
         return () => clearTimeout(searchDelayDebounce)
       }
     })()
-  }, [searchBarState]);
+  }, [searchBarState])
+
+  React.useEffect(() => {
+    document.addEventListener("mousedown", handleOutsideClick)
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick)
+    }
+  })
+
+  const handleOutsideClick = (e) => {
+    if (searchRef.current && !searchRef.current.contains(e.target)) {
+      setShowSearchResults(false)
+    } else {
+      setShowSearchResults(true)
+    }
+  }
 
   const updateBalance = async () => {
-    setEthBalance(Number(await Balance.getEthBalance(provider, signer)).toFixed(4));
-    setWethBalance(Number(await Balance.getWethBalance(provider, signer)).toFixed(4));
+    setEthBalance(Number(await Balance.getEthBalance(provider, signer)).toFixed(4))
+    setWethBalance(Number(await Balance.getWethBalance(provider, signer)).toFixed(4))
   }
 
   const handleKeyDown = (event) => {
     if(event.key === 'Enter') {
       // ToDo: Open first result
     } else if(event.key === "Escape") {
-      document.activeElement.blur();
+      setShowSearchResults(false)
+      document.activeElement.blur()
     }
   }
   
@@ -61,30 +80,30 @@ function TopBar() {
 
   const goToHomePage = useCallback(
     () => {
-      const redirPath = '/';
+      const redirPath = '/'
 
       if(redirPath !== window.location.pathname) {
-        navigate(redirPath, {replace: false});
+        navigate(redirPath, {replace: false})
       }
     }, [navigate]
-  );
+  )
 
   const goToProfilePage = useCallback(
     async () => {
-      const redirPath = '/profile/' + await signer.getAddress();
+      const redirPath = '/profile/' + await signer.getAddress()
 
       if(redirPath !== window.location.pathname) {
-        navigate(redirPath, {replace: false});
+        navigate(redirPath, {replace: false})
       }
     }, [navigate, signer]
-  );
+  )
 
   const goToAuthPage = useCallback(
     async () => {
-      const redirPath = '/auth';
+      const redirPath = '/auth'
 
       if(redirPath !== window.location.pathname) {
-        navigate(redirPath, {replace: false});
+        navigate(redirPath, {replace: false})
       }
     }, [navigate]
   )
@@ -99,10 +118,10 @@ function TopBar() {
         <div className='NavButton NoSelect'>Placements</div>
         <div className='NavButton NoSelect'>Drops</div>
       </div>
-      <div className='SearchWrapper'>
+      <div className='SearchWrapper' ref={searchRef}>
         <input className='SearchBar' onKeyDown={handleKeyDown} onChange={setSearchBarState}></input>
-        {true && <div className='SearchResWrapper'>
-          <div className='SearchResSeparator'>Collections:</div>
+        {showSearchResults && <div className='SearchResWrapper'>
+          {searchResult.length > 0 && <div className='SearchResSeparator'>Collections:</div>}
           <div className='SearchRes'>{
             searchResult.map(r => {
               return <a className='SearchResLine' href={determineNftCollectionUrl(r)}>
@@ -134,4 +153,4 @@ function TopBar() {
   );
 }
 
-export default TopBar;
+export default TopBar

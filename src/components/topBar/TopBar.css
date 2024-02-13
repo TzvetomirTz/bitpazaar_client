@@ -62,7 +62,7 @@
 }
 
 .SearchResWrapper {
-    display: none;
+    /* display: none; */
     border-radius: var(--border-radius-s);
     margin-top: 1rem;
     padding: 1rem;

@@ -1,22 +1,22 @@
-import axios from 'axios';
+import axios from 'axios'
 
-const getNftsByOwnerLambdaUrl = process.env.REACT_APP_GET_NFTS_BY_OWNER_URL;
+const getNftsByOwnerLambdaUrl = process.env.REACT_APP_GET_NFTS_BY_OWNER_URL
 
-const getNftsByOwner = async (accessKey, address) => {
-    const headers = { "Authorization": "Bearer " + accessKey};
-    const params = { address };
+const getNftsByOwner = async (accessKey, address, pageKey = null) => {
+    const headers = { "Authorization": "Bearer " + accessKey }
+    const params = { address, pageKey }
 
     let res = await axios.get(getNftsByOwnerLambdaUrl, { headers, params }).then((res) => {
-        return res;
+        return res
     }).catch((err) => {
-        throw err;
+        throw err
     });
 
-    return res.data;
+    return res.data
 }
 
 const ProfileClient = {
     getNftsByOwner
 };
 
-export default ProfileClient;
+export default ProfileClient

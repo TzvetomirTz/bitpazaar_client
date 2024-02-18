@@ -4,7 +4,7 @@ const nftDataLambdaUrl = process.env.REACT_APP_GET_NFT_DATA_URL;
 const nftRarityLambdaUrl = process.env.REACT_APP_GET_NFT_RARITY_URL;
 
 const getNftData = async (contractAddress, tokenId, accessKey) => {
-    const headers = { "Authorization": "Bearer " + accessKey};
+    const headers = { "Authorization": "Bearer " + accessKey };
     const params = { contractAddress, tokenId };
 
     let res = await axios.get(nftDataLambdaUrl, { headers, params }).then((res) => {
@@ -17,7 +17,7 @@ const getNftData = async (contractAddress, tokenId, accessKey) => {
 }
 
 const getNftRarity = async (contractAddress, tokenId, accessKey) => {
-    const headers = { "Authorization": "Bearer " + accessKey};
+    const headers = { "Authorization": "Bearer " + accessKey };
     const params = { contractAddress, tokenId };
 
     let res = await axios.get(nftRarityLambdaUrl, { headers, params }).then((res) => {

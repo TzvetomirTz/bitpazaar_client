@@ -13,6 +13,9 @@ import copyIcon from '../../assets/copy_icon.svg'
 import plusIcon from '../../assets/plus_icon.svg'
 import loadingAnimation from '../../assets/animations/loading_animation.gif'
 import Authentication from '../../services/Authentication'
+import 'react-dropdown/style.css';
+import '../../styles/NftListDropdown.css'
+import Dropdown from 'react-dropdown'
 
 function ProfilePage() {
   const { profileAddress } = useParams()
@@ -25,6 +28,13 @@ function ProfilePage() {
 	const stateConnectWallet = authState((state) => state.connectWallet)
 	const authenticatedToBackend = authState((state) => state.authenticatedToBackend)
 	const authenticateToBackend = authState((state) => state.authenticateToBackend)
+  const [pageKey, setPageKey] = useState(null)
+  const [moreOwnedNftsLoading, setMoreOwnedNftsLoading] = useState(false)
+
+  // const [searchBarState, setSearchBarState] = useState("")
+  // const [collectionFilter, setCollectionFilter] = useState(collectionsEmptyFilter)
+  // const [ownedNftsCollections, setOwnedNftsCollections] = useState([collectionsEmptyFilter])
+  const collectionsEmptyFilter = "All Collections"
 
   Authentication.tryToContinueSessionIfNeeded(authenticatedToBackend, stateConnectWallet, authenticateToBackend)
 
@@ -40,12 +50,35 @@ function ProfilePage() {
     setOwnedNfts([]) // Clear state when navigating
     setNftListIsLoading(true)
 
-    const nftData = await ProfileClient.getNftsByOwner(accessKey, profileAddress) // ToDo: replace addr
+    const nftData = await ProfileClient.getNftsByOwner(accessKey, profileAddress)
+    
     setHmNftsOwned(nftData.nftsCount)
-    setOwnedNfts(nftData.nfts)
+    setOwnedNfts([...ownedNfts, ...nftData.nfts])
+    setPageKey(nftData.pageKey)
 
     setNftListIsLoading(false)
   }
+
+  const loadMoreNfts = async () => {
+    if(!moreOwnedNftsLoading) {
+      setMoreOwnedNftsLoading(true)
+      const moreNftData = await ProfileClient.getNftsByOwner(accessKey, profileAddress, pageKey)
+  
+      setOwnedNfts([...ownedNfts, ...moreNftData.nfts])
+      setPageKey(moreNftData.pageKey)
+      setMoreOwnedNftsLoading(false)
+    }
+  }
+
+  const handleScroll = (e) => {
+    const isAtTheBottom = document.body.scrollHeight === window.scrollY + window.innerHeight
+
+    if(isAtTheBottom) {
+      // loadMoreNfts()
+    }
+  }
+
+  window.addEventListener("scroll", handleScroll)
 
   return (
     <div className='ProfilePage'>
@@ -60,7 +93,7 @@ function ProfilePage() {
             <div className='NicknameWrapper'>
               <div className='Nickname'>Random Citizen</div>
             </div>
-            <div className='ProfileAddressWrapper NoSelect' onClick={() => {Clipboard.copyToClipboard(profileAddress)}}>
+            <div className='ProfileAddressWrapper NoSelect' onClick={() => { Clipboard.copyToClipboard(profileAddress) }}>
               Address: { profileAddress }
               <img className='CopyIcon' src={copyIcon} alt='' />
             </div>
@@ -70,14 +103,23 @@ function ProfilePage() {
               </a>
               {signer !== null && profileAddress === signer.address && <div className='SocialsChangeButton'>
                 <img className='CogIcon' src={plusIcon} alt='' />
-              </div>
-              }
+              </div>}
             </div>
           </div>
         </div>
-        <div className='ProfileBody'>
+        <div className='ProfileBody' onScroll={ handleScroll }>
+          <div className='ProfileNftsLoaderBar'>
+            <div className='LoadedNftsCounter NoSelect'>NFTs loaded: {ownedNfts.length}/{hmNftsOwned}</div>
+            {ownedNfts.length < hmNftsOwned && <div className='ProfileLoadMoreNfts NoSelect' onClick={ loadMoreNfts }>Load more</div>}
+            {moreOwnedNftsLoading && <img className='LoadingMoreProfileNftsAnimation' src={ loadingAnimation } alt='' />}
+          </div>
           <NftList className="NftList" nfts={ ownedNfts } />
-          {nftListIsLoading && <img className='NftLoadingAnimation' src={loadingAnimation} alt='' />}
+          {nftListIsLoading && <img className='NftLoadingAnimation' src={ loadingAnimation } alt='' />}
+          {!nftListIsLoading && <div className='ProfileNftsLoaderBar'>
+            <div className='LoadedNftsCounter NoSelect'>NFTs loaded: {ownedNfts.length}/{hmNftsOwned}</div>
+            {ownedNfts.length < hmNftsOwned && <div className='ProfileLoadMoreNfts NoSelect' onClick={ loadMoreNfts }>Load more</div>}
+            {moreOwnedNftsLoading && <img className='LoadingMoreProfileNftsAnimation' src={ loadingAnimation } alt='' />}
+          </div>}
         </div>
       </div>
     </div>

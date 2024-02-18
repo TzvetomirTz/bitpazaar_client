@@ -1,8 +1,6 @@
 import './TopBar.css'
 import Logo from '../logo/Logo'
 import React, { useState, useCallback, useRef } from 'react'
-import { isAddress } from 'web3-validator'
-import erc721Adapter from '../../services/contracts/Erc721Adapter'
 import { authState } from '../../state/AuthState'
 import 'react-toastify/dist/ReactToastify.css'
 import Balance from '../../services/Balance'
@@ -10,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import walletIcon from '../../assets/wallet_icon.svg'
 import Search from '../../services/Search'
 import Collection from '../../services/collection/Collection'
+import loadingAnimation from '../../assets/animations/loading_animation.gif'
 
 function TopBar() {
   const navigate = useNavigate()
@@ -22,6 +21,7 @@ function TopBar() {
   const [ethBalance, setEthBalance] = useState("0.0000")
   const [wethBalance, setWethBalance] = useState("0.0000")
   const [showSearchResults, setShowSearchResults] = useState(false)
+  const [loadingSearchResults, setLoadingSearchResults] = useState(false)
   const searchRef = useRef(null)
 
   React.useEffect(() => {
@@ -36,7 +36,9 @@ function TopBar() {
     (async () => {
       if(searchBarState.target && searchBarState.target.value.length > 2) {
         const searchDelayDebounce = setTimeout(async () => {
+          setLoadingSearchResults(true)
           setSearchResult(await Search.search(searchBarState.target.value, accessKey))
+          setLoadingSearchResults(false)
         }, 1000);
   
         return () => clearTimeout(searchDelayDebounce)
@@ -121,8 +123,9 @@ function TopBar() {
       <div className='SearchWrapper' ref={searchRef}>
         <input className='SearchBar' onKeyDown={handleKeyDown} onChange={setSearchBarState}></input>
         {showSearchResults && <div className='SearchResWrapper'>
-          {searchResult.length > 0 && <div className='SearchResSeparator'>Collections:</div>}
-          <div className='SearchRes'>{
+          {loadingSearchResults && <img className='SearchResLoadingAnimation' src={ loadingAnimation } alt='' />}
+          {searchResult.length > 0 && !loadingSearchResults && <div className='SearchResSeparator'>Collections:</div>}
+          <div className='SearchRes'>{!loadingSearchResults &&
             searchResult.map(r => {
               return <a className='SearchResLine' href={determineNftCollectionUrl(r)}>
                 <img className='SearchResLineImage' src={ Collection.getCollectionImageUrl(r) } alt='' />

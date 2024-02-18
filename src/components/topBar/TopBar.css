@@ -62,15 +62,12 @@
 }
 
 .SearchResWrapper {
-    /* display: none; */
     border-radius: var(--border-radius-s);
     margin-top: 1rem;
     padding: 1rem;
     width: 40rem;
-    /* height: 16rem; */
     position: absolute;
     background-color: var(--dark-color);
-    /* overflow-y: scroll; */
     border: 1px solid #fff;
     transition: display 1s;
 }
@@ -90,6 +87,9 @@
 
 .SearchRes {
     color: var(--light-color-1);
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
 }
 
 .SearchResLine {

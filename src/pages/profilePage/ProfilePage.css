@@ -1,5 +1,6 @@
 .ProfilePage {
     display: flexbox;
+    padding-bottom: 2rem;
 }
 
 .ProfileContainer {
@@ -100,4 +101,40 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.ProfileNftsLoaderBar {
+    display: flex;
+    width: 100%;
+    padding: 2rem 0rem;
+    align-items: center;
+}
+
+.LoadedNftsCounter {
+    margin-left: 12rem;
+    color: var(--light-color-1);
+}
+
+.ProfileLoadMoreNfts {
+    margin-left: 2rem;
+    color: var(--light-color-1);
+    background-color: var(--dark-color);
+    padding: 0.2rem 1rem;
+    border-radius: var(--border-radius-s);
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.ProfileLoadMoreNfts:hover {
+    border: 1px solid var(--light-color-1);
+}
+
+.ProfileLoadMoreNfts:active {
+    border: 1px solid transparent;
+    background-color: var(--dark-color-2);
+}
+
+.LoadingMoreProfileNftsAnimation {
+    margin-left: 1rem;
+    width: 2rem;
 }

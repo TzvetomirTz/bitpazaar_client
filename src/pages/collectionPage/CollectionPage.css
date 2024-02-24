@@ -2,6 +2,7 @@
     color: var(--light-color-1);
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .CollectionWrapper {
@@ -49,4 +50,9 @@
 
 .CollectionPageLoadMoreNfts:active {
     background-color: var(--dark-color-2);
+}
+
+.CollectionPageLoadingAnimation {
+    margin-left: 12rem;
+    width: 8rem;
 }

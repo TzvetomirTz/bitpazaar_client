@@ -7,6 +7,7 @@ import React, { useState } from 'react'
 import Collection from '../../services/collection/Collection'
 import { useParams } from 'react-router-dom'
 import NftList from '../../components/nftList/NftList'
+import loadingAnimation from '../../assets/animations/loading_animation.gif'
 
 function CollectionPage() {
     const { collectionAddress } = useParams()
@@ -61,6 +62,7 @@ function CollectionPage() {
                 <NftList className="NftList" nfts={ collectionData } showCollectionsFilter={ false } />
                 <div className='CollectionPageLoadMoreNftsBottomBar'>
                     {!isLoadingMoreCollectionNfts && <div className='CollectionPageLoadMoreNfts NoSelect' onClick={ loadMoreCollectionNfts }>Load More NFTs</div>}
+                    {isLoadingMoreCollectionNfts && <img className='CollectionPageLoadingAnimation' src={ loadingAnimation } alt='' />}
                 </div>
             </div>}
         </div>

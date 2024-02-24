@@ -16,6 +16,8 @@ function CollectionPage() {
 	const accessKey = authState((state) => state.accessKey)
 	const [collectionData, setCollectionData] = useState([])
 	const [collectionDataIsLoading, setCollectionDataIsLoading] = useState(true)
+    const [pageKey, setPageKey] = useState(null)
+    const [isLoadingMoreCollectionNfts, setIsLoadingMoreCollectionNfts] = useState(false)
 
 	Authentication.tryToContinueSessionIfNeeded(authenticatedToBackend, stateConnectWallet, authenticateToBackend)
 
@@ -29,10 +31,20 @@ function CollectionPage() {
 
     const loadCollectionData = async () => {
         setCollectionDataIsLoading(true)
-        Collection.getCollectionData(collectionAddress, accessKey).then((res) => {
-            console.log(JSON.stringify(res))
-            setCollectionData(res)
+        Collection.getCollectionNftsPage(collectionAddress, accessKey).then((res) => {
+            setCollectionData(res.nfts)
+            setPageKey(res.pageKey)
             setCollectionDataIsLoading(false)
+        })
+    }
+
+    const loadMoreCollectionNfts = async () => {
+        setIsLoadingMoreCollectionNfts(true)
+
+        Collection.getCollectionNftsPage(collectionAddress, accessKey, pageKey).then((res) => {
+            setCollectionData([...collectionData, ...res.nfts])
+            setPageKey(res.pageKey)
+            setIsLoadingMoreCollectionNfts(false)
         })
     }
 
@@ -43,10 +55,13 @@ function CollectionPage() {
 
             {!collectionDataIsLoading && <div className='CollectionWrapper'>
                 <div className='CollectionPageBannerWrapper'>
-                    <img className='CollectionPageBanner' src={ collectionData[0].collection.bannerImageUrl } />
+                    <img className='CollectionPageBanner' src={ collectionData[0].collection.bannerImageUrl } alt='' />
                 </div>
                 <div className='CollectionPageTitle'>{ collectionData[0].collection.name }</div>
-                <NftList className="NftList" nfts={ collectionData } showCollectionsFilter={false} />
+                <NftList className="NftList" nfts={ collectionData } showCollectionsFilter={ false } />
+                <div className='CollectionPageLoadMoreNftsBottomBar'>
+                    {!isLoadingMoreCollectionNfts && <div className='CollectionPageLoadMoreNfts NoSelect' onClick={ loadMoreCollectionNfts }>Load More NFTs</div>}
+                </div>
             </div>}
         </div>
     )

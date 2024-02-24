@@ -3,17 +3,17 @@ import axios from 'axios'
 const collectionDataLambdaUrl = process.env.REACT_APP_GET_COLLECTION_NFTS_URL
 const searchLambdaUrl = process.env.REACT_APP_SEARCH_URL
 
-const getCollectionData = async (contractAddress, accessKey, startToken, limit) => {
+const getCollectionNftsPage = async (contractAddress, accessKey, pageKey) => {
     const headers = { "Authorization": "Bearer " + accessKey}
-    const params = { contractAddress, startToken, limit }
+    const params = { contractAddress, pageKey }
 
-    let res = await axios.get(collectionDataLambdaUrl, { headers, params }).then((res) => {
-        return res
+    let page = await axios.get(collectionDataLambdaUrl, { headers, params }).then((res) => {
+        return res.data.collectionPage
     }).catch((err) => {
         throw err
     })
 
-    return res.data.nfts
+    return page
 }
 
 const searchForCollections = async (searchStr, accessKey) => {
@@ -30,7 +30,7 @@ const searchForCollections = async (searchStr, accessKey) => {
 }
 
 const CollectionClient = {
-    getCollectionData,
+    getCollectionNftsPage,
     searchForCollections
 };
 

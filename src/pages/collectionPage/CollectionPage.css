@@ -27,3 +27,26 @@
     margin: 2rem 6rem;
     font-size: 3rem;
 }
+
+.CollectionPageLoadMoreNftsBottomBar {
+    margin-top: 2rem;
+    margin-bottom: 6rem;
+    display: flex;
+}
+
+.CollectionPageLoadMoreNfts {
+    cursor: pointer;
+    padding: 0.5rem 2rem;
+    background-color: var(--dark-color);
+    border: 1px solid transparent;
+    border-radius: var(--border-radius-s);
+    margin-left: 12rem;
+}
+
+.CollectionPageLoadMoreNfts:hover {
+    border: 1px solid var(--light-color-1);
+}
+
+.CollectionPageLoadMoreNfts:active {
+    background-color: var(--dark-color-2);
+}

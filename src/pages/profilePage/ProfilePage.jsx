@@ -70,16 +70,6 @@ function ProfilePage() {
     }
   }
 
-  const handleScroll = (e) => {
-    const isAtTheBottom = document.body.scrollHeight === window.scrollY + window.innerHeight
-
-    if(isAtTheBottom) {
-      // loadMoreNfts()
-    }
-  }
-
-  window.addEventListener("scroll", handleScroll)
-
   return (
     <div className='ProfilePage'>
       <TopBar />
@@ -107,7 +97,7 @@ function ProfilePage() {
             </div>
           </div>
         </div>
-        <div className='ProfileBody' onScroll={ handleScroll }>
+        <div className='ProfileBody'>
           <div className='ProfileNftsLoaderBar'>
             <div className='LoadedNftsCounter NoSelect'>NFTs loaded: {ownedNfts.length}/{hmNftsOwned}</div>
             {ownedNfts.length < hmNftsOwned && <div className='ProfileLoadMoreNfts NoSelect' onClick={ loadMoreNfts }>Load more</div>}
@@ -115,7 +105,7 @@ function ProfilePage() {
           </div>
           <NftList className="NftList" nfts={ ownedNfts } />
           {nftListIsLoading && <img className='NftLoadingAnimation' src={ loadingAnimation } alt='' />}
-          {!nftListIsLoading && <div className='ProfileNftsLoaderBar'>
+          {!nftListIsLoading && hmNftsOwned > 100 && <div className='ProfileNftsLoaderBar'>
             <div className='LoadedNftsCounter NoSelect'>NFTs loaded: {ownedNfts.length}/{hmNftsOwned}</div>
             {ownedNfts.length < hmNftsOwned && <div className='ProfileLoadMoreNfts NoSelect' onClick={ loadMoreNfts }>Load more</div>}
             {moreOwnedNftsLoading && <img className='LoadingMoreProfileNftsAnimation' src={ loadingAnimation } alt='' />}
@@ -127,3 +117,52 @@ function ProfilePage() {
 }
 
 export default ProfilePage
+
+// KEEP THIS HERE TO USE AS REFERENCE WHEN/IF REINTRODUCING THE SEARCH CAPABILITY FOR THE OWNED NFTS
+
+// import 'react-dropdown/style.css';
+// import Dropdown from 'react-dropdown'
+
+// const [searchBarState, setSearchBarState] = useState("")
+// const [collectionFilter, setCollectionFilter] = useState(collectionsEmptyFilter)
+// const [ownedNftsCollections, setOwnedNftsCollections] = useState([collectionsEmptyFilter])
+// const collectionsEmptyFilter = "All Collections"
+
+// determineCollectionFilters()
+
+// useEffect(() => { // Apply search filters
+// (async () => {
+//         let newNftsToRender = []
+
+//   if(collectionFilter.value === collectionsEmptyFilter || typeof collectionFilter.value === "undefined") {
+//     newNftsToRender = nfts
+//   } else {
+//             nfts.forEach(n => {
+//                 if(Nft.determineCollectionNameOfNft(n) === collectionFilter.value) {
+//                     newNftsToRender.push(n)
+//                 }
+//             })
+//         }
+
+//         newNftsToRender = newNftsToRender.filter(n => {
+//             return (!(searchBarState) ||
+//                         (n.contract.openSeaMetadata.collectionName + "").toLowerCase().includes(searchBarState) ||
+//                         (n.contract.name + "").toLowerCase().includes(searchBarState) || 
+//                         (n.name + "").toLowerCase().includes(searchBarState) || 
+//                         (n.tokenId + "").toLowerCase().includes(searchBarState))
+//         })
+
+//         setNftsToRender(newNftsToRender)
+// })()
+// }, [collectionFilter, searchBarState])
+
+
+// const determineCollectionFilters = () => {
+//     setOwnedNftsCollections(Array.from(new Set([collectionsEmptyFilter, ...nfts.map(n => Nft.determineCollectionNameOfNft(n))])))
+// }
+
+
+//             {showCollectionsFilter && <Dropdown options={ ownedNftsCollections } onChange={ setCollectionFilter } value={ collectionsEmptyFilter } placeholder={ collectionsEmptyFilter } />}
+//                         {nfts.length !== 0 && <div className='NftListSearchWrapper'>
+//             <input className='NftListSearchBar' onChange={ (s) => { setSearchBarState(s.target.value.toLowerCase()) } }></input>
+//         </div>}

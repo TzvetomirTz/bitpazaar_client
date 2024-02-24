@@ -1,7 +1,7 @@
 import CollectionClient from "../../clients/CollectionClient"
 
-const getCollectionData = async (contractAddress, accessKey, startToken = 0, limit = 100) => {
-    return CollectionClient.getCollectionData(contractAddress, accessKey, startToken, limit)
+const getCollectionNftsPage = async (contractAddress, accessKey, pageKey) => {
+    return CollectionClient.getCollectionNftsPage(contractAddress, accessKey, pageKey)
 }
 
 const getCollectionImageUrl = (collection) => {
@@ -9,7 +9,7 @@ const getCollectionImageUrl = (collection) => {
 }
 
 const Collection = {
-    getCollectionData,
+    getCollectionNftsPage,
     getCollectionImageUrl
 }
 
